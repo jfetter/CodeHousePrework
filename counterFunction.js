@@ -12,21 +12,20 @@
 // Return output as a single object, and don't use any libraries
 // 5.20.15 approx 1 hr 15 min
 var Counter = {
-text: prompt("Enter some text."),
-words: 0,
-characters: 0,
-spaces: 0
+    text: prompt("Enter some text.")
 };
-Counter.superCounter = function (text,spaces, words)
-{
-  for (i=0; i <text.length; i++)
-  {
-if (text[i] === " ")
-{  spaces ++;}
-  if ((text[i-1]!== " " && text [i] === " " )|| (text[i-1]!== " " && i === text.length-1 ))
-  {words ++;}}
-var characters = (text.length - spaces);
-var aveLength = (characters/ words);
-console.log ("the text you entered has " + words + " words, " + characters + " characters, " + spaces + " spaces and the average word length is " + aveLength + " characters.");
+
+//couldn't figure out what to do w/ add'l spaces without a for loop, so google-rigged my function a bit... 
+
+Counter.superCounter = function(text) {
+    var text1 = text.replace(/ +/g, ' ');
+    text1 = text1.trim();
+    var words = text1.split(" ").length;
+    var spaces = text.split(" ").length - 1;
+    var characters = text.length - spaces;
+    var aveLength = characters / words;
+
+    return("this text contains " + spaces + " spaces and " + words + " words made up of " + characters + " characters. The average word length is: " + aveLength + "   characters long.");
 };
-Counter.superCounter(Counter.text, Counter.spaces, Counter.words);
+
+console.log(Counter.superCounter(Counter.text));
