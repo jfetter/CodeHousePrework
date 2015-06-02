@@ -17,7 +17,7 @@ newText : ""
 
 SwapCase.caseSwap = function (text, newText)
 {
-  for (i=0; i < text.length; i++)
+  for (var i=0; i < text.length; i++)
   {
     if (text[i] === text[i].toLowerCase())
     {
@@ -28,7 +28,7 @@ SwapCase.caseSwap = function (text, newText)
       newText += text[i].toLowerCase();
     }
   }
-  console.log(newText);
+  return(newText);
 };
 
-SwapCase.caseSwap(SwapCase.text, SwapCase.newText);
+console.log (SwapCase.caseSwap(SwapCase.text, SwapCase.newText);
