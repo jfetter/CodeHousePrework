@@ -10,16 +10,17 @@
 // would return:
 
 // { "odds": 4, "negatives": 2, "avg": 8.29, "median": 3 }
-var numbers = [2,4,6,8,10,12];
+
+var numbers = [7, -3, 0, 12, 44, -5, 3];
 
 var identifyOdd = function(array){
  	var odd = [];
  	array.map(function(all, item, index){
- 	if (array[item] % 2 > 0)
+ 	if (Math.abs(array[item] % 2) > 0)
  		{odd.push(array[item]);}
  	return odd;
  	},0);
- 	return odd.join(", ");
+ 	return odd.length;
 }; 
 
 var identifyNegative = function(array){
@@ -29,12 +30,13 @@ var identifyNegative = function(array){
  		{neg.push(array[item]);}
  	return neg;
  	},0);
- 	return neg.join(", ");
+ 	return neg.length;
 }; 
 
 
 var calcMedian = function(array){
-	midPoint = math.round(array.length/2);
+	array = array.sort();
+	midPoint = Math.round(array.length/2);
 	if (array.length%2 === 0)
  	{return array[midPoint];
  	} else {
@@ -49,7 +51,7 @@ var  accumulation;
  	accumulation = previousValue + currentValue;
  	return accumulation;
  	},0);
- 	return accumulation/array.length;
+ 	return (accumulation/array.length).toFixed(2);
  };
 
 
@@ -57,7 +59,6 @@ var  accumulation;
 
 
 var arrayAnalyzer = function(array){
- return '{"odds":' + identifyOdd +' ,"nevatives":' +identifyNegative + ' "avg": '+ calcMean + ' "median": ' + calcMedian +'}';
+ return '{"odds":' + identifyOdd(array) +' ,"negatives":' +identifyNegative(array) + ' "avg": '+ calcMean(array) + ' "median": ' + calcMedian(array) +'}';
 };
-console.log(arrayAnalyzer(7, -3, 0, 12, 44, -5, 3));
-console.log(arrayAnalyzer("what", "happens", "with", "words?"));
+console.log(arrayAnalyzer(numbers));
