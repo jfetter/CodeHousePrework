@@ -26,45 +26,88 @@ var getDate = function(){
  	return futureDate; 
 };
 
-//28771200000= number of milliseconds between April 2nd 2015 and leap year--in 2016
+
 
 var Until = {
 futureDay: (getDate()),
 now: new Date('April 2, 2015 0:00:00')
-
 };
+
 console.log(Until.futureDay);
 console.log(Until.now);
 
- var timeUntil = function (future, now){
- var milliseconds = future - now; 
-console.log(milliseconds);
- var seconds= parseInt(milliseconds/1000); //there are 1000 milliseconds in a secons
- var minutes= seconds/60;        //there are 60 seconds in  aminute
- var hours= minutes/60;          //there are 60 minutes in an hour
- var days= parseInt(hours/24);
- var months = parseInt(days/12);
- 	months =  (months % 12)  ;
- var years= days/365;
-//  	if (days == 1){
-//  	day = "1 day"}
-//  	else {days = days % 24 + " days"};
-// //  	if (months == 1){
-// //  	 months = "1 month, " 
-// //  	}
-// //  	else if (months == 0){months =""}
-// //  	else {months = " months, "};
-// //  	if (years == 1){
-// //  	 years =  "1 year, " 
-// //  	}
-// //  	else if (years == 0){
-// //  	years = ""}
-// //  	else {years =  years + " years, "};
-// // age(2017, 11, 17) -> 2 years, 8 months, 15 days
 
-// // age(2015, 3, 6) -> 4 days
-var YearMoDay = [years, months, days];
-yearMoDay = yearMoDay.join();
+// var futureMonth= function(futureDay){
+// var futureMonth = parseInt(Until.futureDay.getMonth())
+//   console.log(futureMonth);
+// if (futureMonth >= 4)
+//   {return futureMonth + 8;} 
+// else
+// {return futureMonth;}
+// };  
+
+
+// var futureYears = function(futureDay){ 
+// //115 = current year
+// //rename -- yearsUntil?
+//  var futureYears = parseInt(Until.futureDay.getYear())-115;//set year type = 0 for current year
+//   console.log(futureYears)
+//   return futureYears;
+// };
+
+
+var calcMonthsAndDays = function(days, years){
+var days = days; 
+if (days <= 28) {
+  days = days}
+else 
+ {days = Math.abs(days - (365 * years) + parseInt((years +1)/4)); //subtract an extra day off in leap years 
+//futureMonth(Until.futureDay);
+
+//array of days in month starting from May
+var futureDays = [31, 30, 31, 31, 30, 31, 30, 31, 31, 28, 31, 30].reduce(function(all, item ,index, days, futureMonth){
+var months = 0; 
+while (days >= 0){
+ days - index
+  console.log(all)
+  months ++;  };//while
+  return [all, months]; 
+},0); // reduce
+
+}//else
+return futureDays;
+} //calcMonthsAndDays
+
+
+var timeUntil = function (future, now){
+
+ var milliseconds = parseInt(future - now); 
+console.log(milliseconds);
+//  var seconds= parseInt(milliseconds/1000);       
+ var days= parseInt(milliseconds/86400000); // 86400000 milliseconds in a day
+ var years= milliseconds/31557600000; //31557600000 = 365.25 days to account for leap years
+// next leap day is 4.29.16
+
+calcMonthsAndDays(days, years); 
+
+// need to pull days, months out of the value returned from function
+
+
+ 	if (days == 1){
+ 	day = "1 day"}
+ 	else {days = days + " days"};
+ 	if (months >= 1 && months <= 2){
+ 	 months = "1 month,  " 
+ 	}
+ 	else if (months < 1){months =""}
+ 	else {months = months + " months, "};
+ 	if (years >= 1 && years < 2){
+ 	 years =  "1 year," 
+ 	}
+ 	else if (years < 1){
+ 	years = ""}
+ 	else {years =  parseInt(years) + " years, "};
+  var yearMoDay = [years, months, days].join("");
 
 return yearMoDay; 
 };// object TargetDate
