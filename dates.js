@@ -22,18 +22,20 @@ var Until = { //probably need to set this up so this will run like a function;
 	year: prompt ("enter target year in the format #### eg 2015"),
  	month:  prompt ("enter month to expire in the format 1-12"),
  	day: prompt ("enter day to expire in the format 1-31"),
- 	futureDate: new Date(year, month -1, day),
-    now: new Date('April 2, 2015 0:00:00')
 };
 
-console.log(Until.futureDate);
-console.log(Until.now);
+console.log(Until.year, Until.month, Until.day);
+
+var Dates = {
+ 	future: new Date(Until.year, Until.month -1, Until.day),
+    today: new Date('April 2, 2015 0:00:00')
+};
 
 //determine the number of milliseconds that will ellapse
-var numbOfMilliseconds = function(futureDate, now){
-  var milliseconds = parseInt(future - now); 
+var numbOfMilliseconds = function(future, today){
+  var milliseconds = parseInt(future - today); 
   console.log(milliseconds);
-  return milliseconds; }; // call with Until.futureDate, Until.Now
+  return milliseconds; }; // call with Dates.future, Dates.Now
 
 //detrmine the number of years...
 var numbOfYears = function (milliseconds){
@@ -44,17 +46,79 @@ var numbOfYears = function (milliseconds){
 //determine the number of months... 
 var numbOfMonths= function(month, day){
 //var futureMonth = parseInt(Until.futureDay.getMonth())
-   var numberOfMonths;
+  month = parseInt(month);
+  day = parseInt(day); 
+  var numberOfMonths;
    if (month <= 4) {
-    numberOfMonths = 8+ month} 
+    numberOfMonths = 8+ month} //account for today being in april
    else {numberOfMonths = month -4}; 
-   if (day >= 2) {numberOfMonths --};
+   //if (day >= 2) {numberOfMonths --}; // NEED TO ACCOUNT FOR THERE BEING LESS THAN A FULL MONTH BEFORE 2nd AND MORE THAN A FULL MONTH AFTER THE 2nd. 
    console.log("Num Of Months:" + numberOfMonths);
-   return numberOfMonths; // NEED TO ACCOUNT FOR THERE BEING LESS THAN A FULL MONTH BEFORE 2nd AND MORE THAN A FULL MONTH AFTER THE 2nd. 
+   return numberOfMonths; 
 }; // call with Until.month and Until.day 
 
+var Count = {
+  milliseconds: numbOfMilliseconds(Dates.future, Dates.today),
+  days: parseInt(numbOfMilliseconds(Dates.future, Dates.today)/86400000), // 86400000 milliseconds in a day
+  years: parseInt(numbOfYears(numbOfMilliseconds(Dates.future, Dates.today))),
+  months: numbOfMonths(Until.month, Until.day)
+};
+console.log(Count.years, Count.months);
 
-// var futureYears = function(futureDay){ 
+var numbOfDays = function(days, years, months){
+ 
+  //subtract the full years out of the total number of days
+  days = days - ((365 * years) + parseInt((years +1)/4)); //subtract an extra day off in leap years 
+
+  if (days <= 28) { //since April 2nd is start day anything less than 28 days will fall in April, so will not need add' days dedcuted from total 
+  days = days}
+  else 
+  { //array of days in month starting from March and going backwards to May --April not included since it is either going to be one full year or less than one month if futureDate is in April.// go through subtracting days out until you get to May 
+  var futureDays = [31, 28, 31, 31, 30, 31, 31, 31, 31, 30, 31 ].reduce(function(all, item ,index){
+  //will need to know the month to begin in the array
+//   var futureMonth = futureMonth(Until.month, Until.Day); 
+  days - index;
+  months ++;
+  console.log(all, months);
+  return Math.abs(all);  // will end up with a negative number when at the end of the array. 
+}, (11 - numbOfMonths(Until.month, Until.day ))); // end reduce
+days = futureDays;
+}//else
+
+return days;
+} //end numbOfDays
+//call numbOfDays with numbOfMilliseconds(Until.futureDate, Until.now), NumOfYears(numbOfMilliseconds(Until.futureDate,Until.now)), numbOfmonths(Until.month, Until.day), 
+     
+//numbOfDays (Count.milliseconds, Count.years, Count.months);
+
+// need to pull days, months out of the value returned from function
+
+var displayYearMoDay = function( months, years)
+{ 	
+    var days = numbOfDays(Count.days, Count.years, Count.months);
+    if (days == 1){
+ 	days = "1 day"}
+ 	else {days = days + " days"};
+ 	if (months == 1){
+ 	 months = "1 month,  " 
+ 	}
+ 	else if (months < 1){months =""}
+ 	else {months = months + " months, "};
+ 	if (years == 1){
+ 	 years =  "1 year," 
+ 	}
+ 	else if (years < 1){
+ 	years = ""}
+ 	else {years =  years + " years, "};
+  var yearMoDay = [years, months, days].join("");
+
+return yearMoDay; 
+}; // end displayYearMoDay
+console.log(displayYearMoDay( Count.months, Count.years ));
+
+
+
+	// var futureYears = function(futureDay){ 
 // //115 = current year
 // //rename -- yearsUntil?
 //  var futureYears = parseInt(Until.futureDay.getYear())-115;//set year type = 0 for current year
@@ -83,66 +147,5 @@ var numbOfMonths= function(month, day){
 // }, MonthToStartFrom); // end reduce
 // } //end else
 // return monthAndDay;  
-
-var numbOfDays = function(milliseconds, years, months){
-  milliseconds = numbOfMilliseconds(Until.futureDate, Until.now);
-  var days = milliseconds/ parseInt(milliseconds/86400000); // 86400000 milliseconds in a day 
-  //subtract the full years out of the total number of days
-  days = days - ((365 * years) + parseInt((years +1)/4)); //subtract an extra day off in leap years 
-
-  if (days <= 28) { //since April 2nd is start day anything less than 28 days will fall in April, so will not need add' days dedcuted from total 
-  days = days}
-  else 
-  { //array of days in month starting from March and going backwards to May --April not included since it is either going to be one full year or less than one month if futureDate is in April.// go through subtracting days out until you get to May 
-  var futureDays = [31, 28, 31, 31, 30, 31, 31, 31, 31, 30, 31 ].reduce(function(all, item ,index){
-  //will need to know the month to begin in the array
-  var futureMonth = futureMonth(Until.month, Until.Day);
-  var days = days;//from earlier in CalcMonthsAndDays  
-  days - index;
-  months ++;
-  console.log(all, months);
-  return Math.abs(all);  //you will end up with a negative number when you get to the end. 
-}, (11 - numbOfMonths(futureDay))); // end reduce
-//subtract
-}//else
-return futureDays;
-} //calcMonthsAndDays
-//call numbOfDays with 
-
-
-var timeUntil = function (future, now){
-     
-
-
-
-calcMonthsAndDays(days, years); 
-
-// need to pull days, months out of the value returned from function
-
-var displayYearMoDay = function()
-{ 	if (days == 1){
- 	day = "1 day"}
- 	else {days = days + " days"};
- 	if (months >= 1 && months <= 2){
- 	 months = "1 month,  " 
- 	}
- 	else if (months < 1){months =""}
- 	else {months = months + " months, "};
- 	if (years >= 1 && years < 2){
- 	 years =  "1 year," 
- 	}
- 	else if (years < 1){
- 	years = ""}
- 	else {years =  parseInt(years) + " years, "};
-  var yearMoDay = [years, months, days].join("");
-
-return yearMoDay; 
-};// end object TargetDate
-} // end displayYearMoDay
-console.log(timeUntil(Until.futureDay, Until.now));
-
-
-
-	
 
 
