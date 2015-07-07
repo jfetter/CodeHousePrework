@@ -4,7 +4,6 @@
 // If the days are months are more than 12, return X years, Y months, Z days
 // Test Cases
 
-
 // (Assuming today is April 2nd, 2015)
 
 // age(2017, 11, 17) -> 2 years, 8 months, 15 days
@@ -12,22 +11,19 @@
 // age(2015, 3, 6) -> 4 days
 // Note that the month argument starts from 0 (11 is December)
 
-//1. gather new date from user prompts for input = var futureDate
-//2. calculate difference between April 2nd 2015 and future date
-//3. 
 
 
-//create an object breaking down the future day month and year, current date and new date. 
-var Until = { //probably need to set this up so this will run like a function; 
+//create an object that aquires and assigns variables to the future day month and year 
+var Until = { 
 	year: prompt ("enter target year in the format #### eg 2015"),
  	month:  prompt ("enter month to expire in the format 1-12"),
  	day: prompt ("enter day to expire in the format 1-31"),
 };
 
 console.log(Until.year, Until.month, Until.day);
-
+//create an object for today and the future day
 var Dates = {
- 	future: new Date(Until.year, Until.month -1, Until.day),
+ 	future: new Date(Until.year, Until.month, Until.day),
     today: new Date('April 2, 2015 0:00:00')
 };
 
@@ -35,13 +31,13 @@ var Dates = {
 var numbOfMilliseconds = function(future, today){
   var milliseconds = parseInt(future - today); 
   console.log(milliseconds);
-  return milliseconds; }; // call with Dates.future, Dates.Now
+  return milliseconds; }; 
 
 //detrmine the number of years...
 var numbOfYears = function (milliseconds){
-  var years= milliseconds/31557600000; //31557600000 = 365.25 days to account for leap years. next leap day is 4.29.16
+  var years= milliseconds/31557600000; //31557600000 = 365.25 days ...adding extra 1/4 to account for leap years. next leap day is 4.29.16
   console.log(years);
-  return years; }; //call with numbOfMilliseconds-Until.futureDate, Until.now
+  return years; }; 
 
 //determine the number of months... 
 var numbOfMonths= function(month, day){
@@ -49,53 +45,47 @@ var numbOfMonths= function(month, day){
   month = parseInt(month);
   day = parseInt(day); 
   var numberOfMonths;
-   if (month <= 4) {
-    numberOfMonths = 8+ month} //account for today being in april
-   else {numberOfMonths = month -4}; 
+   if (month < 4) { //account for today being in April
+    numberOfMonths = 8+ month} 
+   else {numberOfMonths = month -3}; 
    //if (day >= 2) {numberOfMonths --}; // NEED TO ACCOUNT FOR THERE BEING LESS THAN A FULL MONTH BEFORE 2nd AND MORE THAN A FULL MONTH AFTER THE 2nd. 
    console.log("Num Of Months:" + numberOfMonths);
    return numberOfMonths; 
-}; // call with Until.month and Until.day 
+}; 
 
+//make the returns from timeframes easily accessible for display and calculation of days
 var Count = {
   milliseconds: numbOfMilliseconds(Dates.future, Dates.today),
   days: parseInt(numbOfMilliseconds(Dates.future, Dates.today)/86400000), // 86400000 milliseconds in a day
   years: parseInt(numbOfYears(numbOfMilliseconds(Dates.future, Dates.today))),
   months: numbOfMonths(Until.month, Until.day)
 };
-console.log(Count.years, Count.months);
 
 var numbOfDays = function(days, years, months){
- 
-  //subtract the full years out of the total number of days
-  days = days - ((365 * years) + parseInt((years +1)/4)); //subtract an extra day off in leap years 
-
-  if (days <= 28) { //since April 2nd is start day anything less than 28 days will fall in April, so will not need add' days dedcuted from total 
+  //subtract the full years out of the total number of days and subtract an extra day off in leap years 
+  days = days - ((365 * years) + parseInt((years +1)/4)); 
+  console.log("start days: " + days);
+  if (days <= 28) { //since April 2nd is start day anything less than 28 days will fall in April, so will not need to loop through array and deduct add'l days 
   days = days}
   else 
-  { //array of days in month starting from March and going backwards to May --April not included since it is either going to be one full year or less than one month if futureDate is in April.// go through subtracting days out until you get to May 
-  var futureDays = [31, 28, 31, 31, 30, 31, 31, 31, 31, 30, 31 ].reduce(function(all, item ,index){
+  { //array of days in month starting from March and going backwards to 1 remaining day to account for April 1st 
+  var futureDays = [31, 28, 31, 31, 30, 31, 31, 31, 31, 30, 31, 1].reduce(function(prev, current, index, array){
   //will need to know the month to begin in the array
 //   var futureMonth = futureMonth(Until.month, Until.Day); 
-  days - index;
-  months ++;
-  console.log(all, months);
-  return Math.abs(all);  // will end up with a negative number when at the end of the array. 
-}, (11 - numbOfMonths(Until.month, Until.day ))); // end reduce
-days = futureDays;
+ current = prev - array[index + parseInt(Count.months)]; // set starting point to the number of months back from April
+  console.log( current, prev, array[index]);
+  return Math.abs(current);  // will end up with a negative number when at the end of the array. 
+},days); // end reduce 
+days = days - futureDays;
 }//else
 
 return days;
 } //end numbOfDays
-//call numbOfDays with numbOfMilliseconds(Until.futureDate, Until.now), NumOfYears(numbOfMilliseconds(Until.futureDate,Until.now)), numbOfmonths(Until.month, Until.day), 
-     
-//numbOfDays (Count.milliseconds, Count.years, Count.months);
-
-// need to pull days, months out of the value returned from function
 
 var displayYearMoDay = function( months, years)
 { 	
     var days = numbOfDays(Count.days, Count.years, Count.months);
+    console.log("days I end up with " + days)
     if (days == 1){
  	days = "1 day"}
  	else {days = days + " days"};
@@ -118,34 +108,5 @@ console.log(displayYearMoDay( Count.months, Count.years ));
 
 
 
-	// var futureYears = function(futureDay){ 
-// //115 = current year
-// //rename -- yearsUntil?
-//  var futureYears = parseInt(Until.futureDay.getYear())-115;//set year type = 0 for current year
-//   console.log(futureYears)
-//   return futureYears;
-// };
-
-
-// For all, do days – years…
-
-// Month = someNumber
-// //28 days left in April
-// if (days < 28), days = days. 
-// //?? last box in array is 1? –for date if it is april 1. ??
-
-// Else
-// {
-// factor in startPoint from the actual month they are starting from.
-// var monthToStartFrom = THE GIVEN MONTH OF THE END DATE. 
-// var monthDays = [days in month starting from January—but just 1 day for April…]
-// monthDays.reduce(function(days){})…
-// while days > days[i]
-// {days -= days[i]
-// month ++ 
-// var monthAndDay = [month, days]} //end while loop
-// }, MonthToStartFrom); // end reduce
-// } //end else
-// return monthAndDay;  
 
 
