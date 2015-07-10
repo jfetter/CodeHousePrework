@@ -23,8 +23,8 @@ var Then = {
 //create an object for the current date
 var Today ={
     year: parseInt(2015),
-    month: parseInt(7),
-    day: parseInt(9)
+    month: parseInt(4),
+    day: parseInt(2)
 };
 
 console.log(Then.year, Then.month, Then.day);
@@ -44,18 +44,6 @@ var numbOfMilliseconds = function() {
 
 
 
-
-//determine the number of months... 
-// var numbOfMonths = function() {
-//     var months;// determine the distance the given month is from today 
-//     if (Today.month <= Then.month) { //
-//     months = Then.month - Today.month; 
-//         }//end if the numberic value of today is less than the value of then
-//     else {months = Today.month + Then.month}; // end if the value of today is less than then 
-//     console.log("Num Of Months:" + months);
-//     return months; 
-// };
-
 //calculate the number of years
 var numbOfYears = function(){
     var years = parseInt(Math.abs((numbOfMilliseconds()/ 31536000000))); //31536000000 = number of milliseconds in a year  
@@ -69,10 +57,13 @@ var numbOfYears = function(){
 var Count = {
     milliseconds: numbOfMilliseconds(),
     days: Math.abs(parseInt(numbOfMilliseconds() /86400000 )), // 86400000 milliseconds in a day 
-    years: numbOfYears(),
-   // months: numbOfMonths()
+    years: numbOfYears()
 };
 
+var numOfMonths = function(){
+ var months = parseInt((Math.abs(numbOfMilliseconds()) / 2629740000) - (Count.years * 12) )// 2629740000 miliseconds in a "month" 
+ return months; 
+}
 
 //calculate the number of days remaining after years and months are subtracted
 var numbOfDays = function() {
@@ -92,10 +83,9 @@ var numbOfDays = function() {
         //array of days in month starting from January
         var daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; 
         var i = Today.month-1;
-        var countOfMonths = 0;
         while (days > daysInMonths[i]) //subtract days in past months until you have less days than the current month 
         {
-            if (Today.month <= Then.month ||( Count.milliseconds <0 && Today.month >= Then.month) ){
+            if (Today.month <= Then.month  ){
             days -= daysInMonths[i]; 
             i++;
             
@@ -105,20 +95,20 @@ var numbOfDays = function() {
             days -= daysInMonths[i];  
             i--;
             if(i < 0){i+=11};
-
             }; // else Today.month >
-          console.log(i, daysInMonths[i], days);
+            //countOfMonths ++; 
+          console.log(i, daysInMonths[i],  days);
         } //end while    
         console.log
-       if (Count.milliseconds < 0){ days -= daysInMonths[Then.month-1]}; //account for the fact that you are moving backwards in time not forwards
+       // days -= daysInMonths[Then.month-1]; //account for the fact that you are moving backwards in time not forwards
 
-    return [Math.abs(days), countOfMonths];
+    return Math.abs(days);
 }//end numbOfDays  
 
 var displayYearMoDay = function() 
 {
     var days = numbOfDays();
-    var days = days[0];
+    var days = days;
     console.log("days I end up with " + days)
     if (days == 1) {
         days = "1 day"
@@ -126,7 +116,7 @@ var displayYearMoDay = function()
     else {
         days = days + " days"
     };
-    months = days[1];
+    months = numOfMonths();
     if (months == 1) {
         months = "1 month,  "
     } 
