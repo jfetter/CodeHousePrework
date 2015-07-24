@@ -16,8 +16,7 @@ var wordSelector = function(string){
  	var wordWithMostRepeats =[];
 	//  divide the string in to an array  of word
 	var arrayOfWords = string.split(" "); 
- 	var searchForRepeats = function(){
-         arrayOfWords.map(function(item, index, all){
+ 	var searchForRepeats = arrayOfWords.map(function(item, index, all){
 
  		// divide the word into letters so they can be compared
 		var letters = item.toLowerCase().split(""); 
@@ -27,7 +26,7 @@ var wordSelector = function(string){
  		console.log(sortedWord); 		
  		var currentCountOfRepeats =0;
 	  	console.log(currentCountOfRepeats);
- 		sortedWord.map(function(item1, index1, all1){
+ 		var searchForRepeats = sortedWord.map(function(item1, index1, all1){
  			//if the current letter is the same as the next letter, add 1 to a counter of repeated letters 
   			if (sortedWord[index1] === sortedWord[index1 +1]){
   			currentCountOfRepeats ++;
@@ -53,13 +52,11 @@ var wordSelector = function(string){
   			 	console.log("final" + wordWithMostRepeats);
  			return wordWithMostRepeats;
  		},0); // end map arrayOfWords;
- 	};
-//  	var repeatOffender = document.getElementById("repeatOffender");  //get a handle on the <div> element 
-// 	repeatOffender.innerHTML = wordWithMostRepeats;					//set the content that displays in the <div>
- 	return searchForRepeats();
+ 		//return only the final array produced -- the array that has removed all lesser repeats from the string;
+ 		return searchForRepeats[searchForRepeats.length-1];
 }; // end wordSelector
 
 console.log(wordSelector("He was an eerie bookeeper")); // returns [eerie, bookeeper] 
-console.log(wordSelector("I would have gone to mississippi, but I was willless")); // returns [mississippi] oorrr Mississipi???
+console.log(wordSelector("I would have gone to Mississippi, but I was willless")); // returns [mississippi] oorrr Mississipi???
 console.log(wordSelector("I attribute my success to this: I never gave or took any excuse. –Florence Nightingale")); // returns [attribute, success] 
 console.log(wordSelector("each word has no duplicates"));
