@@ -18,10 +18,6 @@
 
 var ascii = [73, 32, 115, 112, 101, 97, 107, 32, 105, 110, 32, 110, 117, 109, 98, 101, 114, 115]; // I speak in numbers
 
-var numbToAscii = function(arrayOfNumbers)  { return ascii.map(function (item, index, all){
-console.log("all" + all + "item" + item + "index" + index);	
-return String.fromCharCode(item); 	
-},0); 
-};
+console.log (ascii.map(function (item, index, all){return String.fromCharCode(item); },0).toString().replace(/,/g,""));
 
-console.log(numbToAscii(ascii).toString());
+
