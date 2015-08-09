@@ -51,7 +51,7 @@ var  accumulation;
  	accumulation = previousValue + currentValue;
  	return accumulation;
  	},0);
- 	return (accumulation/array.length).toFixed(2);
+ 	return parseFloat((accumulation/array.length).toFixed(2));
  };
 
 
@@ -59,6 +59,13 @@ var  accumulation;
 
 
 var arrayAnalyzer = function(array){
- return '{"odds":' + identifyOdd(array) +' ,"negatives":' +identifyNegative(array) + ' "avg": '+ calcMean(array) + ' "median": ' + calcMedian(array) +'}';
+	var NewArray = [ identifyOdd(array),  identifyNegative(array), calcMean(array), calcMedian(array)].reduce(function(all, item, index){
+ 	var keys = ["Odds", "Negatives", "Average", "Median" ];	
+ 		
+ 		all[keys[index]] = item;
+ 		return all;
+	},{});
+ return NewArray;
+ // '{"odds":' + identifyOdd(array) +' ,"negatives":' +identifyNegative(array) + ' "avg": '+ calcMean(array) + ' "median": ' + calcMedian(array) +'}';
 };
 console.log(arrayAnalyzer(numbers));

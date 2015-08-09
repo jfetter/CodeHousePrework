@@ -1,3 +1,29 @@
+
+function invertColor(hexTripletColor) {
+    var color = hexTripletColor;
+    color = color.substring(1);           // remove # 
+    color = parseInt(color, 16);          // convert to integer
+    color = 0xFFFFFF ^ color;             // invert three bytes
+    color = color.toString(16);           // convert to hex
+    color = ("000000" + color).slice(-6); // pad with leading zeros
+    color = "#" + color;                  // prepend #
+    return color;
+};
+
+var colorRan = function(){ //generate a random number betwen 0- 255
+return Math.floor((255)*Math.random()); //generates a random number between 0 and 255???
+};
+
+
+$(document).ready(function(){
+	$("div").each(function(){ //go through each div and preform a function to switch up the color.
+ 		var coloring = "#" + colorRan() ; //prepend a # to randomly generated number...???? 
+ 		$(this).css("background-color", coloring);
+ 		$(this).css("color", invertColor(coloring)); // plug in inverting function for text color assign random coloration as argument. 
+	}); // end div.each
+	}); // end document.ready
+
+
 //create an object that aquires and assigns variables to a future or past year month and day 
 var Then = {
 	year: parseInt(prompt("enter target year in the format #### eg 2015")),
@@ -8,8 +34,8 @@ var Then = {
 //create an object for the year, month and date of the current date (or another date to compare to the first)
 var Today = {
 	year: parseInt(2015),
-	month: parseInt(4),
-	day: parseInt(2)
+	month: parseInt(7),
+	day: parseInt(13)
 };
 
 //create an object for the two dates you are comparing
