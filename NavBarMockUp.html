@@ -16,26 +16,29 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
 <style type="text/css">
-      div{background-color: #BDDEFF;
-      font-weight: bold;
-      }
+   
+      a{color: white;
+      background-color: #BDDEFF;
+          font-weight: bold;}     
 
-      a{color: white;}
 </style>
 
   </head>
   <body>
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" >
   <div class="container-fluid">
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-         <ul class="nav navbar-nav">
-           <a href="#"><i class="fa fa-home" style="font-size:2em; color:white; position:center"></i></a>
-         </ul>
+      <ul class="nav navbar-nav nav-tabs">
+         <ul class="nav nav-tabs">
+          
+          <li class="button" >
+          <a href="#"  role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-home" style="font-size:1.25em"></i> </a>
+          </li>         
+
             <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Community <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Community</a>
           <ul class="dropdown-menu">
             <li><a href="#">Recent Activity</a></li>
             <li role="separator" class="divider"></li>
@@ -44,13 +47,13 @@
             <li><a href="#">Member List</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Member Groups</a></li> 
-      </ul>
-    </li>
-      </ul>
-         <div class="collapse navbar-collapse" id="petHelp">
-      <ul class="nav navbar-nav">
+      </ul> <!-- end dropdown-menu -->
+    </li> <!-- end li dropdown -->
+      
+
+   
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pet Help <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pet Help </a>
           <ul class="dropdown-menu">
             <li><a href="#"> Bird-Brained- recovering from cranial bird attacks</a></li>
             <li role="separator" class="divider"></li>
@@ -61,11 +64,12 @@
             <li><a href="#">Reptile Disfunction -living with ornery lizards </a></li>
           </ul>
         </li>
-      </ul>
-        <div class="collapse navbar-collapse" id="petsForSale">
-      <ul class="nav navbar-nav">
+   
+    
+
+   
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pets for Sale <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pets for Sale</a>
           <ul class="dropdown-menu">
             <li><a href="#">Auspicious Aloysius</a></li>
             <li role="separator" class="divider"></li>
@@ -76,11 +80,11 @@
             <li><a href="#">Tavis</a></li>
           </ul>
         </li>
-      </ul>
-    <div class="collapse navbar-collapse" id="petServices">
-      <ul class="nav navbar-nav">
+
+ 
+
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pet Services<span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pet Services</a>
           <ul class="dropdown-menu">
             <li><a href="#">Groovy Grooming</a></li>
             <li role="separator" class="divider"></li>
@@ -91,7 +95,10 @@
             <li><a href="#">Fish Psychologists</a></li>
           </ul>
         </li>
-      </ul>
+      
+ <!-- end navbar-nav -->
+
+    </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
