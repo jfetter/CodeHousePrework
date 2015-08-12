@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>Widget Mock Up</title>
 
    <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -16,24 +16,40 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
 <style type="text/css">
-div{display: inline-block;}
+
+ 
+
+.container-fluid{background-color:yellow;
+ height:100%;
+  }
 
 #one{background-color:red;
+  font-size:1.25vw;
 }
 #two{background-color:green;
+font-size:1.25vw;
 }
 #three{background-color:blue;
+font-size:1.25vw;
 }
                   
 </style>
 
   </head>
   <body>
-<div class="column" >
-  <div class="span4" id="one">...</div>
-  <div class="span4" id="two">...</div>
-  <div class="span4" id="three">...</div>
-</div>
+<div class="container-fluid" >
+
+
+<div class="row-fluid" > 
+  <div class="item" class="col-xs-3 offset1" id="one"> Assorted Vegetables (1lb) <img class="img-responsive" src="http://mythrigroceries.com/wp-content/uploads/2015/01/Fresh-Indian-Vegetables.jpg">
+    <div class="row-fluid">
+      <div class="col"> $1.00 </div>
+      <div class="col"> QTY: <input class="dropdown"> </div>
+    </div>
+  <div class="item" class="col-xs-3 offset1"  id="two"> Raspberries 1lb <img class="img-responsive" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR6Ck1Y7f5XYKDkcSHbGVcH-rM3zHWqueOY7VwSoffGRhSY6HVC"></div>
+  <div class="item" class="col-xs-3 offset1"  id="three"> 1 Fresh Kiwi <img class="img-responsive" src="http://www.internetbillboards.net/wp-content/uploads/kiwifruit.jpg"></div>
+</div> <!--end row-fluid-->
+</div> <!--end container-fluid-->
 
 
 
@@ -42,5 +58,6 @@ div{display: inline-block;}
     <!-- Include all compiled plugins (below), or include individual files as needed -->
    <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="localJS"> </script>
   </body>
 </html>
