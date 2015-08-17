@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Widget Mock Up</title>
+    <title>Bootstrap 101 Template</title>
 
    <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -16,48 +17,59 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
 <style type="text/css">
-
- 
-
-.container-fluid{background-color:yellow;
- height:100%;
-  }
-
-#one{background-color:red;
-  font-size:1.25vw;
-}
-#two{background-color:green;
-font-size:1.25vw;
-}
-#three{background-color:blue;
-font-size:1.25vw;
-}
+   
+      .dropdown-toggle, .homeButton{color: white;
+      background-color: #ABCDD9;
+          font-weight: bold;} 
                   
 </style>
 
   </head>
   <body>
-<div class="container-fluid" >
+ <body>
+<div class="container">
+    <div class="row">
+      
+      <div class="col col-sm-3" id="one"> Assorted Vegetables (1lb) <img class="img-responsive" src="http://mythrigroceries.com/wp-content/uploads/2015/01/Fresh-Indian-Vegetables.jpg">
+      <div class="container"><p style="font-size:10vw"> $1.00 </p> </div>
+      
+      <div class="container"> QTY:  <input type="text" class="form-control" id="usr">
+         <div class="btn-group">
+            <button type="button" class="form-control btn btn-default dropdown-toggle" data-toggle="dropdown">
+               <ul class="dropdown-menu dropdown-menu-right">
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#">5</a></li>
+          <li><a href="#">6</a></li>
+          <li><a href="#">7</a></li>
+          <li><a href="#">8</a></li>
+          <li><a href="#">9</a></li>
+          <li><a href="#">10</a></li>
+        </ul>
+            <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="form-control btn col-sm-2"> Add To Cart </button>
+         
+    </div> <!-- end btn-group -->
+        </div> <!-- end QTY -->
+       </div><!-- /input-group -->
+      
+</div> <!--end #one -->
 
-
-<div class="row-fluid" > 
-  <div class="item" class="col-xs-3 offset1" id="one"> Assorted Vegetables (1lb) <img class="img-responsive" src="http://mythrigroceries.com/wp-content/uploads/2015/01/Fresh-Indian-Vegetables.jpg">
-    <div class="row-fluid">
-      <div class="col"> $1.00 </div>
-      <div class="col"> QTY: <input class="dropdown"> </div>
-    </div>
-  <div class="item" class="col-xs-3 offset1"  id="two"> Raspberries 1lb <img class="img-responsive" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR6Ck1Y7f5XYKDkcSHbGVcH-rM3zHWqueOY7VwSoffGRhSY6HVC"></div>
-  <div class="item" class="col-xs-3 offset1"  id="three"> 1 Fresh Kiwi <img class="img-responsive" src="http://www.internetbillboards.net/wp-content/uploads/kiwifruit.jpg"></div>
-</div> <!--end row-fluid-->
+  <div class="item" class="col col-sm-3 "  id="two"> Raspberries 1lb <img class="img-responsive" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR6Ck1Y7f5XYKDkcSHbGVcH-rM3zHWqueOY7VwSoffGRhSY6HVC"></div>
+  <div class="item" class="col col-sm-3 "  id="three"> 1 Fresh Kiwi <img class="img-responsive" src="http://www.internetbillboards.net/wp-content/uploads/kiwifruit.jpg"></div>
+</div> <!--end outter row-->
 </div> <!--end container-fluid-->
 
 
+		
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-   <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script src="localJS"> </script>
-  </body>
+</body>	
 </html>
