@@ -1,0 +1,80 @@
+<!-- Create the game of hangman in jQuery
+
+Here's a version created in Vanilla JS: http://codepen.io/cathydutton/full/ldazc/
+
+Don't use that code as you reference, I want you to do this from scratch.
+
+I want you to do things a bit differently too:
+
+Use jQuery and Bootstrap, for everything
+Hard code a big array of 100+ source words in your javascript, and pick a word randomly from that.
+Take the input directly from the user keyboard, and report it (used characters so far, wrong ones, ..) Don't take any input from the mouse.
+If the user pressed a key for a character that has already been used, blink the screen
+Use a library to add some cool animation when you win/lose the game. -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Produce Check Out</title>
+
+   <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+       <!-- fontAwesome-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+<style type="text/css">
+   body{background-color: violet; 
+ 	 	border-radius: 10%;
+     }
+
+</style>
+
+  </head>
+  <body>
+    <header>
+
+    </header>
+        <div class="container">
+            <div class="row">
+              <div col-sm-10>
+                <div id="accuser"><img src="accuser.png"></div>
+                <div id="usedLetters"> </div>
+               <div id="availableLetters"></div>
+                <div id="gallows"></div>
+               <div id="host"></div>
+          
+           </div> <!-- end col-sm-10 -->
+          </div> <!-- end row -->
+        </div> <!-- end container-->
+
+   <!-- 1. set up display of used letters in one corner
+ 		2. set up display of available letters in another corner
+ 		3. have a hangman gallows displayed from the start
+ 		4. use found images or make an image of hangman parts
+ 		5. containter to display dialogu for game procedure
+ 		6. adorable graphic(s) and/or image(s) to sit next to game instructions
+ 		7. 
+	-->
+   
+  
+
+
+    <footer>
+
+    </footer>
+    
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="localJS.js"></script>
+</body> 
+</html>
