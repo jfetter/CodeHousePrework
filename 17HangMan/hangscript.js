@@ -1,7 +1,5 @@
 
-// set up 2 html pages to switch between. One pages is the accusor - explains rules gives game dialogue etc.
-// 2nd page is the actual hang man gallows with stick figure walking towards platform and display of
-// blanks spaces, used letters, available letters. 
+
 // 1. function to ammend available letters based on key entered-> replace available letters with "". 
 // include a loop to denote invalid key entrered (for numbers, symbols etc)
 // 2. function display used letters -> when letters are moved out of available they are pushed into an array either for used letters (which are not in the answer) OR the letters are revealed in the answer; 
@@ -30,24 +28,52 @@
 // $(document).ready(function(item){
 
 $(document).ready(function(){
-$("#usedLetters").keyup(function(){
-    var usedLetter = $("#usedLetters").val().toLowerCase();
-        availableLets = [];
-    if (availableLets.indexOf(user) > -1){
-     $("#usedLetters ").append("<span>usedLetter</span>");
-}
-    
-});
+    var words =["it","can","be","intimidating","to","leave","your","job","and","pursue","novel","career","opportunities","but","ultimately","when","given","only","one", "life", "experiencing", "more", "challenging","oneself", "seems","better","than","sticking","with","status","quo","ride", "tigers","drive","racecars","communicate", "with", "computers", "eat","weird","fruit", "but", "never", "stagnate"] 
+    var length = words.length;    
+
+    var chooseWord = function(words){
+        return words[Math.floor((Math.random()*length)-1)] 
+        }
+
+    var word = chooseWord(words);
+
+    var letters = word.split("");
+    console.log(letters);
+
+    var spaceOut = function(spaces) {
+        var blank = " __ "
+        return blank.repeat(spaces)
+        }
+ 
+    var spaces = spaceOut(letters.length);
+
+    console.log(spaces);
+
+    $("#blanks").append(spaces);
 });
 
 //at document ready (execute this section of code only once (1) function to randomly select a word from the word array
 //(2) function to break the word into an array of letters .split("")
 //(3)function to set up a number of blanks that corresponds to the .length of the array
+//(4)roll intro dialogue from the accusor -- including randomly selected crime
 
+// for game play loop 
 // coordinate so (1)dilogue says choose a letter!
 //(2) image changes to gallows and character walking towards gallows $("#picture").attr("src","gallows.png")
 //(3) css changes id of input field for enterLetter from invisible to a visible color $("#enterLetter").css("display","inline-block");
-//(5) display box shwoing letters used
+//(5) display box showing letters used
+// // after prompting, take user input of one letter 
+// $("#usedLetters").keyup(function(){
+//     var usedLetter = $("#usedLetters").val().toLowerCase();
+//         availableLets = [];
+//     if (availableLets.indexOf(user) > -1){
+//      $("#usedLetters ").append("<span>usedLetter</span>");
+// }
+    
+// });
 // if a letter that is entered is contained in the used letter element OR the 
 // key typed is not a letter, then blink the screen .fadeIn("fast").delay(800)
 //    .fadeout("fast")
+// game play loop ends when either 9 wrong guesses are given OR all blanks are filled in
+
+//end of game either animation of stick figure swinging on noose OR image of accusor and dialoge like "my bad. Guess you do know a think or two about words. case dismissed"

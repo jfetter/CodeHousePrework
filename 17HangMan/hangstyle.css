@@ -30,4 +30,16 @@ background-color:white;
 padding: 2em; 
 }
 
+img{padding-bottom: 10px;}
+
 #enterLetter{display: none;}
+
+#blanks{
+background-color:#f3961c;
+color: green;
+font-weight: bold;
+border-width: 10px;
+border-color: violet;
+padding-top: 10px;
+text-align: center;
+}
