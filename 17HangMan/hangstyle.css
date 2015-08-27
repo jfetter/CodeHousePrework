@@ -1,0 +1,33 @@
+  body{background-color: violet; 
+ 	 	border-radius: 10%;
+     }
+
+/*speech bubble style from: http://nicolasgallagher.com/pure-css-speech-bubbles */
+      .triangle-isosceles {
+  position: relative;
+  padding: 25px;
+  margin: 1em 0 3em;
+  color: #000;
+  background: #f3961c;
+  border-radius: 10px;
+  background: linear-gradient(top, #f9d835, #f3961c);
+}
+/* creates triangle */
+.triangle-isosceles:after {
+  content: "";
+  display: block; /* reduce the damage in FF3.0 */
+  position: absolute;
+  bottom: -15px;
+  left: 50px;
+  width: 0;
+  border-width: 15px 15px 0;
+  border-style: solid;
+  border-color: #f3961c transparent;
+}
+
+#usedLetters{
+background-color:white;
+padding: 2em; 
+}
+
+#enterLetter{display: none;}

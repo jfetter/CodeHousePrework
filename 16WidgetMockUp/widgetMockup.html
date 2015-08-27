@@ -1,26 +1,24 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Produce Check Out</title>
-
-   <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-       <!-- fontAwesome-->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
-<style type="text/css">
-      .right{
+    <head>
+        <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+                    <title>Produce Check Out</title>
+                    <!-- Latest compiled and minified CSS -->
+                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+                        <!-- Optional theme -->
+                        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+                            <!-- fontAwesome-->
+                            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+                                <style type="text/css">
+      .pricePerQty{
       font-size: 8px;
       color: gray; 
-    padding-left: 40%;
+      text-alighn: right;
+    
       }
 
        .addToCart{
@@ -30,18 +28,17 @@
       select{background-color:white;
       color: black; 
       font-size: 16px; 
-      height: 25px;
-      width: 50px;
       border-radius: 0;
+      text-align: left;
         }
 
-      .pricingInfo{
-        max-width: 493px;
+      .pricingInfo{    
         border-radius: 0;
-        padding: 10px;
         }
+        
+        .well{border-radius: 0;}
 
-      #outterCoulmn, .cartItem{
+      #outterColumn, .cartItem{
           background-color: #4289c7;
           background-url: http://api.thumbr.it/whitenoise-361x370.png?background=4ea8c9ff&noise=626262&density=61&opacity=15;
          padding-top: 10vw;
@@ -56,98 +53,179 @@
                   
         .total{color: green;}
 
-        img{background-color: white;
-             width: 493px;
-             max-height: 320px;
+        img{background-color: white; 
             }
 
-        .cartItem{  width: 75%;
-             height: 75%
-            }
+        
+
+
 </style>
-
-  </head>
-  <body>
-    <header>
-
-    </header>
-   
-   
-   
-
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12" id="outterCoulmn">
-                        <div class="row">
-                            <div class="col-sm-4">
-                              <div class="container-fluid cartItem" >
-                                <div>Assorted Vegetables (1lb)<img class="img-responsive" src="http://mythrigroceries.com/wp-content/uploads/2015/01/Fresh-Indian-Vegetables.jpg"></div>
-                                    <div class="well pricingInfo">
-                                    <span class "pricePerQty">$1.00 </span> 
-                                       <span class="pricePerQty right"> QTY:<select class="1-100"></select> </span>
-                                      <div class="total" onclick="total()"> </div>
-                                      <div class="addToCart">
-                                     <a href="" class= "btn btn-success btn-block"> 
-                                    <span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart</a> 
-                                    </div> <!-- end addToCart -->
-                                    </div> <!--end pricingInfo -->
-                                </div> <!--end assorted vegetables -->
-                             </div> <!-- end col-md-6 -->
-                      
-                             <div class="col-sm-4">
-                                    <div class="cartItem" >
-                                 <div class="item"  id="two"> Raspberries 1lb <img id="two" class="img-responsive" src="http://www.naturipefarms.com/wp-content/uploads/2012/04/Raspberry-Image2.png"></div>
-                                    <div class="well pricingInfo">
-                                    <span class "pricePerQty">$2.50 </span> 
-                                       <span class="pricePerQty right"> QTY:<select class="1-100"></select> </span>
-                                      <div class="total" onclick="total()"> </div>
-                                      <div class="addToCart">
-                                     <a href="" class= "btn btn-success btn-block"> 
-                                    <span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart</a> 
-                                    </div> <!-- end addToCart -->
-                                    </div> <!--end pricingInfo -->
-                                </div> <!--end assorted vegetables -->
-                             </div> <!-- end col-md-6 -->
-                         
-
-
-
-                               <div class="col-sm-4">
-                                    <div class="cartItem" >
-                                 <div class="item"  id="three"> 1 Fresh Kiwi <img class="img-responsive" src="http://www.internetbillboards.net/wp-content/uploads/kiwifruit.jpg"></div>
-                                    <div class="well pricingInfo">
-                                    <span class "pricePerQty">$.30 </span> 
-                                       <span class="pricePerQty right"> QTY:<select class="1-100"></select> </span>
-                                      <div class="total" onclick="total()"> </div>
-                                      <div class="addToCart">
-                                     <a href="" class= "btn btn-success btn-block"> 
-                                    <span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart</a> 
-                                    </div> <!-- end addToCart -->
-                                    </div> <!--end pricingInfo -->
-                                </div> <!--end assorted vegetables -->
-                             </div> <!-- end col-md-6 -->
-                             
-                              
-
-                      </div> <!-- end nested row -->
-                 </div> <!-- end first Column --> 
-            </div> <!-- end row -->
-        </div> <!-- end container -->
-       
-
-  
-      
+                            </head>
+                            <body>
+                                <header></header>
+                                <div class="container" style="background-color: white">
+                                    <div class="row">
+                                        <div class="col-sm-12" id="outterCoulmn" >
+                                            
+                                            <div class="row ">
+                                                <div class="cartItem col-sm-4 col-lg-4" >
+                                                    <div class="row desciption">
+                                                        <div class="col-sm-12">
+                                                            <div>Assorted Vegetables (1lb)</div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end description -->
+                                                    <div class="row vegImg">
+                                                        <div class="col-sm-12">
+                                                            <img class="img-responsive" src="http://mythrigroceries.com/wp-content/uploads/2015/01/Fresh-Indian-Vegetables.jpg">
+                                                            </div>
+                                                        </div>
+                                                        <!-- end vegImg-->
+                                                        <div class= "well">
+                                                            <div class="row pricingInfo">
+                                                                <div class=" col-sm-2 col-lg-2">
+                                                                    <span>$1.00 </span>
+                                                                </div>
+                                                                <div class =" col-sm-3 col-lg-3">
+                                                                    <span></span>
+                                                                </div>
+                                                                <div class="col-sm-2 col-lg-2">
+                                                                    <span class="pricePerQty"> QTY:</span>
+                                                                </div>
+                                                                <div class="col-sm-2 col-lg-2">
+                                                                    <select class= "1-100"></select>
+                                                                </div>
+                                                            </div>
+                                                            <!--end row-->
+                                                            <div class="row">
+                                                                <div class="col-sm-2 total" onclick="total()"></div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-12 addToCart">
+                                                                    <a href="" class= "btn btn-success btn-block">
+                                                                        <span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end addToCart -->
+                                                </div>
+                                                <!--end cart item -->
+                                            </div>
+                                            <!--end assorted vegetables -->
+                                        
 
 
-    <footer>
+                                                        <div class="cartItem col-sm-4 col-lg-4" >
+                                                    <div class="row desciption">
+                                                        <div class="col-sm-12">
+                                                            <div>Raspberries 1lb</div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end description -->
+                                                    <div class="row vegImg">
+                                                        <div class="col-sm-12">
+                                                            <img class="img-responsive" src="http://www.naturipefarms.com/wp-content/uploads/2012/04/Raspberry-Image2.png">
+                                                        </div>
+                                                      </div>
+                                                        <!-- end vegImg-->
+                                                        <div class= "well">
+                                                            <div class="row pricingInfo">
+                                                                <div class=" col-sm-2 col-lg-2">
+                                                                    <span>$2.50 </span>
+                                                                </div>
+                                                                <div class =" col-sm-3 col-lg-3">
+                                                                    <span></span>
+                                                                </div>
+                                                                <div class="col-sm-2 col-lg-2">
+                                                                    <span class="pricePerQty right"> QTY:</span>
+                                                                </div>
+                                                                <div class="col-sm-2 col-lg-2">
+                                                                    <select class= "1-100"></select>
+                                                                </div>
+                                                            </div>
+                                                            <!--end row-->
+                                                            <div class="row">
+                                                                <div class="col-sm-2 total" onclick="total()"></div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-12 addToCart">
+                                                                    <a href="" class= "btn btn-success btn-block">
+                                                                        <span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end addToCart -->
+                                                </div>
+                                                <!--end cart item -->
+                                            </div>
+                                            <!--end assorted raspberries -->
 
-    </footer>
-    
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="localJS.js"></script>
-</body> 
-</html>
+
+ <div class="cartItem col-sm-4 col-lg-4" >
+                                                    <div class="row desciption">
+                                                        <div class="col-sm-12">
+                                                            <div>1 Fresh Kiwi</div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end description -->
+                                                    <div class="row vegImg">
+                                                        <div class="col-sm-12">
+                                                            <img class="img-responsive" src="http://www.internetbillboards.net/wp-content/uploads/kiwifruit.jpg">
+                                                            </div>
+                                                        </div>
+                                                        <!-- end vegImg-->
+                                                        <div class= "well">
+                                                            <div class="row pricingInfo">
+                                                                <div class=" col-sm-2 col-lg-2">
+                                                                    <span>$.30 </span>
+                                                                </div>
+                                                                <div class =" col-sm-3 col-lg-3">
+                                                                    <span></span>
+                                                                </div>
+                                                                <div class="col-sm-2 col-lg-2">
+                                                                    <span class="pricePerQty"> QTY:</span>
+                                                                </div>
+                                                                <div class="col-sm-2 col-lg-2">
+                                                                    <select class= "1-100"></select>
+                                                                </div>
+                                                            </div>
+                                                            <!--end row-->
+                                                            <div class="row">
+                                                                <div class="col-sm-2 total" onclick="total()"></div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-12 addToCart">
+                                                                    <a href="" class= "btn btn-success btn-block">
+                                                                        <span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end addToCart -->
+                                                </div>
+                                                <!--end cart item -->
+                                            </div>
+                                            <!--end assorted vegetables -->
+
+
+                                        </div>
+                                        <!-- end nested row -->
+                                    </div>
+                                    <!-- end outter Column -->
+                                </div>
+                                <!-- end row -->
+                            </div>
+                            <!-- end container -->
+                            <footer></footer>
+                            <!-- Latest compiled and minified JavaScript -->
+                            <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+                            <!-- Latest compiled and minified JavaScript -->
+                            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+                            <script src="localJS.js"></script>
+                        </body>
+                    </html>
