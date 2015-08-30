@@ -25,31 +25,51 @@
 // . function to animate win/ loss (from a library) --> Have dialogue character run back and forth across the screen with a comment bubble that says "Yay" when you win and runs off the screen saying "uh-Oh" when you lose
 //    $("img").animate({ top: '+=100px'}, 1000);
 
-// $(document).ready(function(item){
+
 
 $(document).ready(function(){
-    var words =["it","can","be","intimidating","to","leave","your","job","and","pursue","novel","career","opportunities","but","ultimately","when","given","only","one", "life", "experiencing", "more", "challenging","oneself", "seems","better","than","sticking","with","status","quo","ride", "tigers","drive","racecars","communicate", "with", "computers", "eat","weird","fruit", "but", "never", "stagnate"] 
-    var length = words.length;    
+    var words =["it","can","be","intimidating","to","leave","your","job","and","pursue","novel","career","opportunities","but","ultimately","when","given","only","one", "life", "experiencing", "more", "challenging","oneself", "seems","better","than","sticking","with","status","quo","ride", "tigers","drive","racecars","communicate", "with", "computers", "eat","weird","fruit", "but", "never", "stagnate"] ; 
+ 
+    var crimes = ["literally using the word literally figuratively", "making a run on a sentenced inmate that didn't desrve to be so bombarded by all of the things that you felt were deserved by him", "cow-tipping", "putting a comma in a coma", "unlawful use of you're your", "failure to complete your sentence...", "public indecent text poster", "alligations of alliteration for ulterior allocation"];
 
-    var chooseWord = function(words){
-        return words[Math.floor((Math.random()*length)-1)] 
+    var choose = function(array){
+        var array = array;
+        return array[Math.floor((Math.random()*(array.length))-1)] 
         }
 
-    var word = chooseWord(words);
+    var word = choose(words);
+    console.log(word);
 
     var letters = word.split("");
     console.log(letters);
 
     var spaceOut = function(spaces) {
-        var blank = " __ "
+        var blank = " __ ";
         return blank.repeat(spaces)
         }
- 
+     
     var spaces = spaceOut(letters.length);
 
-    console.log(spaces);
-
-    $("#blanks").append(spaces);
+    $("#blanks").text(spaces); 
+    Mousetrap.bind('return', function() {      
+    var dialogue =["You may be wondering why you're here","You are being tried by the grammar police" , choose(crimes), "to prove your innocence you must correctly guess the word I am thinking of", "the punishment for failure...","is death","by hanging"];
+    sayNow = -1;   
+    console.log(dialogue[sayNow+1]);
+    while (sayNow < dialogue.length)
+    {
+    sayNow ++; 
+    $("#speech").text(dialogue[sayNow])
+    }
+    return false;
+    
+//         var sayNow = -1; 
+//         while (sayNow < dialogue.length)
+//         {sayNow ++; 
+//         $("#speech").text(dialogue[sayNow])
+//         }
+//         return false; 
+   
+});
 });
 
 //at document ready (execute this section of code only once (1) function to randomly select a word from the word array
@@ -59,7 +79,7 @@ $(document).ready(function(){
 
 // for game play loop 
 // coordinate so (1)dilogue says choose a letter!
-//(2) image changes to gallows and character walking towards gallows $("#picture").attr("src","gallows.png")
+//(2) image changes to gallows and character walking towards gallows $("#picture").attr("src",image[i]);
 //(3) css changes id of input field for enterLetter from invisible to a visible color $("#enterLetter").css("display","inline-block");
 //(5) display box showing letters used
 // // after prompting, take user input of one letter 
