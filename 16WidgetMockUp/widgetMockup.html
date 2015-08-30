@@ -53,8 +53,10 @@
                   
         .total{color: green;}
 
-        img{background-color: white; 
-            }
+        img{background: white;
+            margin: 0 auto;
+} 
+            
 
         
 
@@ -68,7 +70,10 @@
                                         <div class="col-sm-12" id="outterCoulmn" >
                                             
                                             <div class="row ">
-                                                <div class="cartItem col-sm-4 col-lg-4" >
+                                                <div class="cartItem col-sm-3 col-lg-3" >
+
+<!-- why don't all of the produce lay side by side next to each other when page is open to full width? each is spanning 3 columns, so there is only a total of 9 columns being used and yet they still lay on top of each other -->
+                        
                                                     <div class="row desciption">
                                                         <div class="col-sm-12">
                                                             <div>Assorted Vegetables (1lb)</div>
@@ -78,7 +83,8 @@
                                                     <div class="row vegImg">
                                                         <div class="col-sm-12">
                                                             <img class="img-responsive" src="http://mythrigroceries.com/wp-content/uploads/2015/01/Fresh-Indian-Vegetables.jpg">
-                                                            </div>
+<!-- how do I get all images to be a uniform height --OR-- have a white background that goes above them to fill in an area of a uniform height, while still keeping the size of their div responsive to screen size?-->                                                            
+                                                             </div>
                                                         </div>
                                                         <!-- end vegImg-->
                                                         <div class= "well">
@@ -92,6 +98,7 @@
                                                                 <div class="col-sm-2 col-lg-2">
                                                                     <span class="pricePerQty"> QTY:</span>
                                                                 </div>
+<!-- Why does the select (drop down) element hang off the side of the ".well" div I created? / it seems to go beyond the column its in -->
                                                                 <div class="col-sm-2 col-lg-2">
                                                                     <select class= "1-100"></select>
                                                                 </div>
@@ -117,15 +124,16 @@
                                         
 
 
-                                                        <div class="cartItem col-sm-4 col-lg-4" >
+                                                        <div class="cartItem col-sm-3 col-lg-3" >
                                                     <div class="row desciption">
                                                         <div class="col-sm-12">
-                                                            <div>Raspberries 1lb</div>
+                                                            <div> Raspberries 1lb</div>
                                                         </div>
                                                     </div>
                                                     <!-- end description -->
                                                     <div class="row vegImg">
-                                                        <div class="col-sm-12">
+                                                        <div class="col-sm-12" style="background-color: white">
+<!-- since image (on some screen sizes) is narrower than the column it is contained in I want to change background color of its column to white, but the white background spans farther than the other elements within the main column. How do I fix this?-->
                                                             <img class="img-responsive" src="http://www.naturipefarms.com/wp-content/uploads/2012/04/Raspberry-Image2.png">
                                                         </div>
                                                       </div>
@@ -133,10 +141,10 @@
                                                         <div class= "well">
                                                             <div class="row pricingInfo">
                                                                 <div class=" col-sm-2 col-lg-2">
-                                                                    <span>$2.50 </span>
+                                                                    <div>$2.50 </div>
                                                                 </div>
                                                                 <div class =" col-sm-3 col-lg-3">
-                                                                    <span></span>
+                                                                    <div></div>
                                                                 </div>
                                                                 <div class="col-sm-2 col-lg-2">
                                                                     <span class="pricePerQty right"> QTY:</span>
@@ -165,7 +173,7 @@
                                             <!--end assorted raspberries -->
 
 
- <div class="cartItem col-sm-4 col-lg-4" >
+ <div class="cartItem col-sm-3 col-lg-3" >
                                                     <div class="row desciption">
                                                         <div class="col-sm-12">
                                                             <div>1 Fresh Kiwi</div>
@@ -180,16 +188,17 @@
                                                         <!-- end vegImg-->
                                                         <div class= "well">
                                                             <div class="row pricingInfo">
-                                                                <div class=" col-sm-2 col-lg-2">
+                                                                <div class=" col-sm-2 col-lg-2 col-md-2 col-xs-2">
                                                                     <span>$.30 </span>
                                                                 </div>
-                                                                <div class =" col-sm-3 col-lg-3">
+                                                                <div class =" col-sm-3 col-lg-3 col-md-2 col-xs-2">
                                                                     <span></span>
                                                                 </div>
-                                                                <div class="col-sm-2 col-lg-2">
+                                                                <div class="col-sm-2 col-lg-2 col-md-2 col-xs-2">
                                                                     <span class="pricePerQty"> QTY:</span>
                                                                 </div>
-                                                                <div class="col-sm-2 col-lg-2">
+                                                                <div class="col-sm-2 col-lg-2 col-md-2 col-xs-2">
+<!-- is there some way to tell the "col" to span a certain number of columns without having to specify every screen size -->                                                                  
                                                                     <select class= "1-100"></select>
                                                                 </div>
                                                             </div>
