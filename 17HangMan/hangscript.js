@@ -55,17 +55,25 @@ $(document).ready(function(){
     };
     $("#blanks").text(spaces); 
 
-    
+    var lightening = function(){
+      return $("body").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+      //$('#sound_tag')[0].play();
+    };
      
   Mousetrap.bind('return', function() {       
-    var dialogue =["You may be wondering why you're here","You are being tried by the grammar police" , choose(crimes), "to prove your innocence you must correctly guess the word I am thinking of", "the punishment for failure...","is death","by hanging"];
+    var dialogue =["You may be wondering why you're here","You are being tried by the grammar police for" , choose(crimes), "to prove your innocence you must correctly guess the word I am thinking of", "the punishment for failure...","is death","by hanging"];
     var sayNow = $("#sayNow").text();    
     sayNow = parseInt(sayNow);   
     console.log(sayNow);
     sayNow ++;
     $("#sayNow").text(sayNow);
-   if ( sayNow <= dialogue.length ){        
+    sayNow = parseInt(sayNow); 
+    console.log(sayNow + "now")
+   if ( sayNow < dialogue.length ){        
         return $("#speech").text(dialogue[sayNow])
+        }
+    else if (sayNow == dialogue.length){
+        return lightening(); 
         }
     else return gamePlay(); 
 });

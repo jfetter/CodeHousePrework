@@ -35,27 +35,29 @@ Use a library to add some cool animation when you win/lose the game. -->
     <header>
 
     </header>
+        <audio id="sound_tag" src="your_audio_file.wav" preload="auto"></audio>
+
         <div class="container">
             <div class="row">
               <div class= "col-sm-10">
                 
                 <div id="dialogAndPic">
-                <div class="triangle-isosceles" id="speech"></div>
+                <div class="triangle-isosceles" id="speech">press enter</div>
                 <div id="picture">
                 <img class="img-responsive" src="accuser.png">
                 </div> <!-- end picture -->
-                </div> <!-- end dialogAndPic --> 
+                </div> <!-- end dialogAndPic -->
 
                 <div class="row"> 
-                <div class="col-sm-10" id="blanks"> </div> 
+                <div class="col-sm-10 invisible" id="blanks"> </div> 
 
                </div> <!-- end row for blanks-->
                 
                <div class="row">
-               <input class="col-xs-4" id="enterLetter">
+               <input class="col-xs-4 invisible" id="enterLetter">
                </div> <!-- end row -->
               
-              <div id="sayNow">-1</div>
+              <div id="sayNow" class="invisible">-1</div>
           
            </div> <!-- end col-sm-10 -->
           </div> <!-- end outter row -->
