@@ -32,11 +32,11 @@ $(document).ready(function(){
  
     var crimes = ["literally using the word literally figuratively", "making a run on a sentenced inmate that didn't desrve to be so bombarded by all of the things that you felt were deserved by him", "cow-tipping", "putting a comma in a coma", "unlawful use of you're your", "failure to complete your sentence...", "public indecent text poster", "alligations of alliteration for ulterior allocation"];
 
-    var choose = function(array){
+ var choose = function(array){
         var array = array;
-        return array[Math.floor((Math.random()*(array.length))-1)] 
+        return array[Math.floor((Math.random()*(array.length-1))-1)] 
         }
-
+    
     var word = choose(words);
     console.log(word);
 
@@ -50,26 +50,29 @@ $(document).ready(function(){
      
     var spaces = spaceOut(letters.length);
 
+    var gamePlay = function(){
+
+    };
     $("#blanks").text(spaces); 
-    Mousetrap.bind('return', function() {      
-    var dialogue =["You may be wondering why you're here","You are being tried by the grammar police" , choose(crimes), "to prove your innocence you must correctly guess the word I am thinking of", "the punishment for failure...","is death","by hanging"];
-    sayNow = -1;   
-    console.log(dialogue[sayNow+1]);
-    while (sayNow < dialogue.length)
-    {
-    sayNow ++; 
-    $("#speech").text(dialogue[sayNow])
-    }
-    return false;
+
     
-//         var sayNow = -1; 
-//         while (sayNow < dialogue.length)
-//         {sayNow ++; 
-//         $("#speech").text(dialogue[sayNow])
-//         }
-//         return false; 
-   
+     
+  Mousetrap.bind('return', function() {       
+    var dialogue =["You may be wondering why you're here","You are being tried by the grammar police" , choose(crimes), "to prove your innocence you must correctly guess the word I am thinking of", "the punishment for failure...","is death","by hanging"];
+    var sayNow = $("#sayNow").text();    
+    sayNow = parseInt(sayNow);   
+    console.log(sayNow);
+    sayNow ++;
+    $("#sayNow").text(sayNow);
+   if ( sayNow <= dialogue.length ){        
+        return $("#speech").text(dialogue[sayNow])
+        }
+    else return gamePlay(); 
 });
+  
+   
+  
+       
 });
 
 //at document ready (execute this section of code only once (1) function to randomly select a word from the word array
