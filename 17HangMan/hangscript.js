@@ -50,9 +50,14 @@ $(document).ready(function(){
      
     var spaces = spaceOut(letters.length);
 
-    var gamePlay = function(){
+    var switchPic = function(imageNumb){
+        var images = ["gallows.png","gallows2.png","gallows3.png","gallows4.png","gallows5.png","gallows6.png","gallows7.png","gallows8.png","gallows9.png"];
+        return $(".pic").attr("src", images[imageNumb]);   
+    }    
 
-    };
+   
+
+
     $("#blanks").text(spaces); 
 
     var lightening = function(){
@@ -60,8 +65,25 @@ $(document).ready(function(){
       //$('#sound_tag')[0].play();
     };
      
+    
+    var gamePlay = function(){
+        
+        Mousetrap.bind('space', function() {  
+        $("#speech").addClass("invisible");
+        $("#blanks, #enterLetter, #usedLetters").removeClass("invisible");
+        switchPic(0);
+            while (guessLetters <=8)
+            {
+            }
+         if (x = y){
+            return "won"
+            }
+         else {return "lost"}
+        });
+    };
+
   Mousetrap.bind('return', function() {       
-    var dialogue =["You may be wondering why you're here","You are being tried by the grammar police for" , choose(crimes), "to prove your innocence you must correctly guess the word I am thinking of", "the punishment for failure...","is death","by hanging"];
+    var dialogue =["You may be wondering why you're here...","You are being tried by the grammar police for..." , choose(crimes), "to prove your innocence you must correctly guess the word I am thinking of...", "the punishment for failure...","is death...","by hanging!"];
     var sayNow = $("#sayNow").text();    
     sayNow = parseInt(sayNow);   
     console.log(sayNow);
@@ -69,16 +91,16 @@ $(document).ready(function(){
     $("#sayNow").text(sayNow);
     sayNow = parseInt(sayNow); 
     console.log(sayNow + "now")
-   if ( sayNow < dialogue.length ){        
+   if ( sayNow < dialogue.length ){          
         return $("#speech").text(dialogue[sayNow])
         }
-    else if (sayNow == dialogue.length){
-        return lightening(); 
-        }
-    else return gamePlay(); 
+    else {
+        lightening(); 
+        $("#speech").text("press space to begin");
+         return gamePlay();
+    }
 });
   
-   
   
        
 });

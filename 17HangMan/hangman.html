@@ -44,17 +44,20 @@ Use a library to add some cool animation when you win/lose the game. -->
                 <div id="dialogAndPic">
                 <div class="triangle-isosceles" id="speech">press enter</div>
                 <div id="picture">
-                <img class="img-responsive" src="accuser.png">
+                <img class="img-responsive pic" src="accuser.png">
                 </div> <!-- end picture -->
                 </div> <!-- end dialogAndPic -->
 
                 <div class="row"> 
                 <div class="col-sm-10 invisible" id="blanks"> </div> 
+                <div class="col-sm-12 spacer"></div>
 
                </div> <!-- end row for blanks-->
                 
                <div class="row">
-               <input class="col-xs-4 invisible" id="enterLetter">
+               <div class="col-xs-12 invisible" id="enterLetter" >Enter A Letter </div>
+               <div class="col-xs-12 usedLetters invisible" id="usedLetters"></div>             
+ 
                </div> <!-- end row -->
               
               <div id="sayNow" class="invisible">-1</div>

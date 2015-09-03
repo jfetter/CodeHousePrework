@@ -30,11 +30,15 @@ background-color:white;
 padding: 2em; 
 }
 
-img{padding-bottom: 10px;}
+img {padding-bottom: 10px;
+     padding-top: 10px;
+}
 
 .invisible {display: none;}
 
 #blanks{
+margin-left: 10px;
+margin-right: 10px;
 background-color:#f3961c;
 color: green;
 font-weight: bold;
@@ -42,4 +46,11 @@ border-width: 10px;
 border-color: violet;
 padding-top: 10px;
 text-align: center;
+}
+
+#enterLetter{
+font-size: 1.5em;
+padding-top: 10px;
+text-align: center;
+font-weight: bold;
 }
