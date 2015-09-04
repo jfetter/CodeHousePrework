@@ -28,60 +28,114 @@
 
 
 $(document).ready(function(){
+    
+
+// selecting word and setting up game
     var words =["it","can","be","intimidating","to","leave","your","job","and","pursue","novel","career","opportunities","but","ultimately","when","given","only","one", "life", "experiencing", "more", "challenging","oneself", "seems","better","than","sticking","with","status","quo","ride", "tigers","drive","racecars","communicate", "with", "computers", "eat","weird","fruit", "but", "never", "stagnate"] ; 
  
     var crimes = ["literally using the word literally figuratively", "making a run on a sentenced inmate that didn't desrve to be so bombarded by all of the things that you felt were deserved by him", "cow-tipping", "putting a comma in a coma", "unlawful use of you're your", "failure to complete your sentence...", "public indecent text poster", "alligations of alliteration for ulterior allocation"];
 
- var choose = function(array){
+    var choose = function(array){
         var array = array;
         return array[Math.floor((Math.random()*(array.length-1))-1)] 
-        }
-    
+        }; 
     var word = choose(words);
     console.log(word);
-
     var letters = word.split("");
-    console.log(letters);
-
     var spaceOut = function(spaces) {
         var blank = " __ ";
         return blank.repeat(spaces)
-        }
-     
+        }  
     var spaces = spaceOut(letters.length);
-
-    var switchPic = function(imageNumb){
-        var images = ["gallows.png","gallows2.png","gallows3.png","gallows4.png","gallows5.png","gallows6.png","gallows7.png","gallows8.png","gallows9.png"];
-        return $(".pic").attr("src", images[imageNumb]);   
-    }    
-
-   
-
-
-    $("#blanks").text(spaces); 
 
     var lightening = function(){
       return $("body").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
       //$('#sound_tag')[0].play();
     };
-     
+
+// game play
+
+//as wrong answers accumulate, switch to the next picture in the gallows array
+    var switchPic = function(imageNumb){
+        var images = ["gallows.png","gallows2.png","gallows3.png","gallows4.png","gallows5.png","gallows6.png","gallows7.png","gallows8.png","gallows9.png"];
+        return $(".pic").attr("src", images[imageNumb]);   
+    }    
+    $("#blanks").text(spaces); 
+
+// see if the letter that was guessed is in the word and if so, plug it in to the display where the blanks are whever that letter occurs
+//      var checkGuess = function(letters){
+//      var letters = letters;
+//      letters.map.(function(all,item,index)
+//      var answerSoFar = $("#blanks").text().split(); //**** NEED TO TAKE INFO FROM BLANKS AND CONVERT IT INTO AN ARRAY 
+//      if ($("#enterLetter").text() === letters[index]){ 
+//        answersSoFar= answersSoFar.splice(index, 0, enterLetter))  } // insert the letter that was entered into the array in the place where the letter appears in the answer word
+//        answersSoFar= answersSoFar.splice(index -1, 1) // remove the blanks where the letter was placed
+//          )}
+//        return $("#blanks").text(answerSoFar.toString().replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"");); //show the new display of blanks and letters in the answer -- without any commas or square brackets
+
+// grab only one letter that the user has inputinto the enterLetter input field
+//Only allow one letter to be input at a time (per turn).
+
+var inputGuess = function(letters){
+    var letters = letters; 
+    $("#enterLetter").keyup(function(){
+    var letterValue = $("#enterLetter").val().toLowerCase();
+
+// compare the letter that was input to see if it is an already used letter, if it is a new match with a letter from the word OR if it is a new wrong guess 
+
+//    var queryUsed = letterValue.indexOf(usedLetters, letterValue)
+//     if (queryUsed > -1) //check to see if the letter entered has been used. 
+// { 
+//     return "usedLetter";
+// }
+//     else {
+//     return letterValue }
     
-    var gamePlay = function(){
-        
-        Mousetrap.bind('space', function() {  
+});
+}
+
+// end of game sequences
+var happyDance = function(){animation}
+
+var swingInNoose = function(){animation}
+
+var winOrLose = function() {
+    if ($("#blanks").text().split().indexOf(" __ ") === -1){return happyDance() }
+    else {return swingInNoose()}
+}
+
+// loop to control flow of game       
+    var gamePlay = function(letters){ 
+        var letters = letters;             
+        console.log(letters);
+        Mousetrap.bind('space', function() { 
         $("#speech").addClass("invisible");
         $("#blanks, #enterLetter, #usedLetters").removeClass("invisible");
-        switchPic(0);
-            while (guessLetters <=8)
-            {
-            }
-         if (x = y){
-            return "won"
-            }
-         else {return "lost"}
-        });
-    };
+        var count = 0; 
+        switchPic(count);
+        var wrongLetters = []; 
+        var length = wrongLetters.length;
+        inputGuess(); 
+//             while (length <= 8)
+//             {
+//           if (inputGuess() === "usedLetter"){lightening()};
+//           else { checkGuess() }// see if new letter is in the solution word 
+//              
+    
+//     var processGuess = function ()
+//         {
+//          if ( inputGuess() === newLetter){
+//             count ++; 
+//             switchPic(count);
+//             }
+//          else if {
+//                 return
+                }) //end space bind
+             } // end game play
+        
 
+
+// game intro
   Mousetrap.bind('return', function() {       
     var dialogue =["You may be wondering why you're here...","You are being tried by the grammar police for..." , choose(crimes), "to prove your innocence you must correctly guess the word I am thinking of...", "the punishment for failure...","is death...","by hanging!"];
     var sayNow = $("#sayNow").text();    
@@ -101,8 +155,7 @@ $(document).ready(function(){
     }
 });
   
-  
-       
+                
 });
 
 //at document ready (execute this section of code only once (1) function to randomly select a word from the word array
@@ -123,7 +176,8 @@ $(document).ready(function(){
 //      $("#usedLetters ").append("<span>usedLetter</span>");
 // }
     
-// });
+// }); // end document ready
+
 // if a letter that is entered is contained in the used letter element OR the 
 // key typed is not a letter, then blink the screen .fadeIn("fast").delay(800)
 //    .fadeout("fast")

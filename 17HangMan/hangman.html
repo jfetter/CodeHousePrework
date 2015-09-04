@@ -41,10 +41,11 @@ Use a library to add some cool animation when you win/lose the game. -->
             <div class="row">
               <div class= "col-sm-10">
                 
+                <div class="col-xs-12 usedLetters invisible" id="usedLetters"></div>   
                 <div id="dialogAndPic">
                 <div class="triangle-isosceles" id="speech">press enter</div>
                 <div id="picture">
-                <img class="img-responsive pic" src="accuser.png">
+                <img class="img-responsive pagination-centered pic" src="accuser.png">
                 </div> <!-- end picture -->
                 </div> <!-- end dialogAndPic -->
 
@@ -55,8 +56,10 @@ Use a library to add some cool animation when you win/lose the game. -->
                </div> <!-- end row for blanks-->
                 
                <div class="row">
-               <div class="col-xs-12 invisible" id="enterLetter" >Enter A Letter </div>
-               <div class="col-xs-12 usedLetters invisible" id="usedLetters"></div>             
+               <label class="invisible" for="enterLetter"> Enter A letter </label>
+               <input type="text" class="col-xs-12 invisible" id="enterLetter" placeholder="Enter A Letter" > 
+               <span id="storeLetter"> </span>
+          
  
                </div> <!-- end row -->
               
