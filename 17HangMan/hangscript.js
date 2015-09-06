@@ -17,50 +17,59 @@ $(document).ready(function(){
     console.log(word);
     var letters = word.split("");
     var spaceOut = function(spaces) {
-        var blank = " __ ";
+        var blank = "__ ";
         return blank.repeat(spaces)
         }  
     var spaces = spaceOut(letters.length);
 
-
+     $("#blanks").text(spaces);
 
     var lightening = function(){
       return $("body").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
       //$('#sound_tag')[0].play();
-    };
+   
+     };
 
 // game play
 
 //as wrong answers accumulate, switch to the next picture in the gallows array
-    var switchPic = function(imageNumb){
+var switchPic = function(imageNumb){
         var images = ["gallows.png","gallows2.png","gallows3.png","gallows4.png","gallows5.png","gallows6.png","gallows7.png","gallows8.png","gallows9.png"];
         return $(".pic").attr("src", images[imageNumb]);   
-    }    
-    $("#blanks").text(spaces); 
+}    
+   
 
-var inputGuess = function(){
-    $("#enterLetter").focus();
-    $("#enterLetter").keydown(function(){ 
+var inputGuess = function(){          
+     $("#enterLetter").focus();
+     $("#enterLetter").keyup(function(){ 
     var guess = $("#enterLetter").val().toLowerCase();
 //hide the input letter field after a letter is entered space bar counts as first entry
-    if (guess.length >= 1){  $("#enterLetter, #storeLetter").addClass("invisible"); } 
-        $("#storeLetter").text(guess);
-    console.log("in function" + guess);
-    return guess;
-    }); //end keyup
+    console.log("guess length" + guess.length)
+    console.log(guess);
+    if (guess.length >= 2){  
+    $("#storeLetter").html(guess);
+    console.log("store letter is" + guess)
+    $("#enterLetter").addClass("invisible");  
+    checkGuess(guess)
+        }
+}); //end keyup         
 }   // end input guess 
  
 // see if the letter that was guessed is in the word and if so, plug it in to the display where the blanks are whever that letter occurs
       var checkGuess = function(guess){
-            console.log("then guess is =" + guess);
-//      letters.map.(function(all,item,index)
-//      var answerSoFar = $("#blanks").text().split(); //**** NEED TO TAKE INFO FROM BLANKS AND CONVERT IT INTO AN ARRAY 
-//      if ($("#enterLetter").text() === letters[index]){ 
-//        answersSoFar= answersSoFar.splice(index, 0, enterLetter))  } 
+        console.log(letters);
+      letters.map(function(item,index,all){
+      var answerSoFar = $("#blanks").text().split(" "); //**** NEED TO TAKE INFO FROM BLANKS AND CONVERT IT INTO AN ARRAY 
+       console.log(answerSoFar)
+        console.log("all" + all + "item" + item + "index" + index);
+     if (guess === letters[index]){ 
+        answersSoFar= answersSoFar.splice(index, 0, enterLetter)   // end if 
 // insert the letter that was entered into the array in the place where the letter appears in the answer word
-//        answersSoFar= answersSoFar.splice(index -1, 1) // remove the blanks where the letter was placed
-//          )}
-//        return $("#blanks").text(answerSoFar.toString().replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,""););
+      answersSoFar= answersSoFar.splice(index -1, 1) // remove the blanks where the letter was placed
+         }// end if
+            $("#blanks").text(answerSoFar.toString().replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,""));
+         }) // end map
+
 //show the new display of blanks and letters in the answer -- without any commas or square brackets 
 //grab one letter (only 1 letter per turn) that the user has inputinto the enterLetter input field
 
@@ -93,12 +102,15 @@ var winOrLose = function() {
         $("#speech").addClass("invisible");
         $("#blanks, #enterLetter, #usedLetters").removeClass("invisible");
         var count = 0; 
-//      while (length <= 8)
         switchPic(count);
         var wrongLetters = []; 
         var length = wrongLetters.length;
-        var guess = inputGuess();
-        checkGuess(guess); 
+//      while (length <= 8){ switchPic(count)}
+        inputGuess();
+        
+
+         
+//        checkGuess(); 
 //             {
 //           if (inputGuess() === "usedLetter"){lightening()};
 //           else { checkGuess() }// see if new letter is in the solution word 
