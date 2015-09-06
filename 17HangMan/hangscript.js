@@ -22,7 +22,7 @@ $(document).ready(function(){
         }  
     var spaces = spaceOut(letters.length);
 
-     $("#blanks").text(spaces);
+     $("#blanks").html(spaces);
 
     var lightening = function(){
       return $("body").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
@@ -49,7 +49,7 @@ var inputGuess = function(){
     if (guess.length >= 2){  
     $("#storeLetter").html(guess);
     console.log("store letter is" + guess)
-    $("#enterLetter").addClass("invisible");  
+    $("#enterLetter").addClass("invisible"); 
     checkGuess(guess)
         }
 }); //end keyup         
@@ -60,16 +60,23 @@ var inputGuess = function(){
         console.log(letters);
       letters.map(function(item,index,all){
       var answerSoFar = $("#blanks").text().split(" "); //**** NEED TO TAKE INFO FROM BLANKS AND CONVERT IT INTO AN ARRAY 
-       console.log(answerSoFar)
-        console.log("all" + all + "item" + item + "index" + index);
-     if (guess === letters[index]){ 
-        answersSoFar= answersSoFar.splice(index, 0, enterLetter)   // end if 
-// insert the letter that was entered into the array in the place where the letter appears in the answer word
-      answersSoFar= answersSoFar.splice(index -1, 1) // remove the blanks where the letter was placed
-         }// end if
-            $("#blanks").text(answerSoFar.toString().replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,""));
-         }) // end map
+        console.log("current blank " + answerSoFar[index]);
+        console.log( "guess " + guess + " item " + item + " index " + index);
+     if (guess == " " + item){ 
+// insert the matched letter in the place where the letter appears in the answer (index) and remove (1) item (the blank) from the array in that place
+    alert("match at index " + index + ". " + guess  + " = " + item);    
+    answerSoFar= answerSoFar.splice(index, 1, guess);  
 
+// remove commas from blank and correct letter display
+      $("#blanks").text(answerSoFar); 
+        //.toString().replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"")    
+         }// end if
+      else {$("#wrongGuess").append("x")}
+    if ($("#wrongGuess").text().length >= letters.length){$("#wrongGuess").text(1)}
+   }); // end map
+    
+// if the letter didn't match anything in the answer word, throw it into the used letters box
+  if ($("#wrongGuess").text() == 1) { $("#usedLetters").text(guess)}
 //show the new display of blanks and letters in the answer -- without any commas or square brackets 
 //grab one letter (only 1 letter per turn) that the user has inputinto the enterLetter input field
 
@@ -102,15 +109,13 @@ var winOrLose = function() {
         $("#speech").addClass("invisible");
         $("#blanks, #enterLetter, #usedLetters").removeClass("invisible");
         var count = 0; 
-        switchPic(count);
-        var wrongLetters = []; 
+        var wrongLetters = $("#usedLetters").text(); 
         var length = wrongLetters.length;
-//      while (length <= 8){ switchPic(count)}
+//      while (length <= 8){ 
+        switchPic(count)
         inputGuess();
+//      }// end while
         
-
-         
-//        checkGuess(); 
 //             {
 //           if (inputGuess() === "usedLetter"){lightening()};
 //           else { checkGuess() }// see if new letter is in the solution word 
