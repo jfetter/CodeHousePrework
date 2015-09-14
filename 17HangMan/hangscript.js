@@ -54,12 +54,17 @@ function Gallows() {
 var gallows = new Gallows(); 
 
 //grab one letter (only 1 letter per turn) that the user has inputinto the enterLetter input field
-var inputGuess = function() {     
+var inputGuess = function() { 
+    if ($("#enterLetter").val.length < 3){
+        $("#enterLetter").focus();
+    alert("too slow");
+    }else{     
     var guess = $("#enterLetter").val();
     $("#storeLetter").text(guess);
-    console.log("made it through inputGuess")   
-    return   $("#storeLetter").text(guess);
- } // end inputGuess
+console.log("step 2.1: guess is " + guess)
+console.log ("step 2.2: length of input: "+ $("#enterLetter").val.length)
+}    
+} // end inputGuess
 
 // see if the letter that was guessed is in the word and if so, plug it in to the display where the blanks are whever that letter occurs
 var checkGuess = function(guess) {
@@ -136,18 +141,17 @@ speech = ["You may be wondering why you're here...", "You are being tried by the
  
 
 Hangman = function(){
+    
 // sequence of events for each letter guessed
     this.turnPlay = function(){
-    $("img").load(function() {
         if (gallows.count < $("#usedLetters").text().length){
             gallows.count ++
             switchPic(gallows.images, gallows.count)
             } 
-        console.log("gallows count " + gallows.count)         
-            $("#enterLetter").keyup(inputGuess());
-            console.log($("#storeLetter").text().length);
+            inputGuess();
+console.log("step 3.1: gallows count " + gallows.count)               
+console.log("step 3.2: this many letters have been guessed: " + $("#storeLetter").text().length);
            // guessUsedOrNot();
-        }); // end img load
     } // end turnPlay
 } // end Hangman
 var hangman = new Hangman();
@@ -157,10 +161,9 @@ var setUpGameDisplay = function() {
              Mousetrap.unbind("space", setUpGameDisplay);            
              $("#speech").addClass("invisible"); 
              $("#blanks").text(answer.fillInAnswer(answer.numOfLetters));
-console.log(answer.fillInAnswer(answer.numOfLetters))
+console.log("step 1" + answer.fillInAnswer(answer.numOfLetters))
              $("#blanks, #enterLetter, #usedLetters, #labelUsedLetters").removeClass("invisible");
              switchPic(gallows.images, 0);
-             $("#enterLetter").focus();
   };
 
 //see if the letter entered has been used or not
@@ -190,6 +193,6 @@ $(document).ready(function() {
  
     Mousetrap.bind('return', introduction.advance);
     Mousetrap.bind('space', setUpGameDisplay);
-    $("img").load(hangman.turnPlay());
+    $("input").load(hangman.turnPlay());
 
 });// end document ready
