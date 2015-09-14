@@ -1,40 +1,60 @@
-// selecting word and setting up game
-var validGuess = 0; 
+// utility functions
 
-var alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
-
-var words = ["it", "can", "be", "intimidating", "to", "leave", "your", "job", "and", "pursue", "novel", "career", "opportunities", "but", "ultimately", "when", "given", "only", "one", "life", "experiencing", "more", "challenging", "oneself", "seems", "better", "than", "sticking", "with", "status", "quo", "ride", "tigers", "drive", "racecars", "communicate", "with", "computers", "eat", "weird", "fruit", "but", "never", "stagnate"];
-
-var crimes = ["literally using the word literally figuratively", "making a run on a sentenced inmate that didn't desrve to be so bombarded by all of the things that you felt were deserved by him", "cow-tipping", "putting a comma in a coma", "unlawful use of you're your", "failure to complete your sentence...", "public indecent text poster", "alligations of alliteration for ulterior allocation"];
-
-var choose = function(array) {
+//choose a random element from an array
+var chooseRandomElement = function(array) {
     var array = array;
-// var test
-    return array[Math.floor((Math.random() * (array.length - 1)) - 1)]
+    return array[Math.floor((Math.random() * (array.length-1)) - 1)]
 };
 
- var count = $("#usedLetters").text().length;
-
-var dialogue = ["You may be wondering why you're here...", "You are being tried by the grammar police for...", choose(crimes), "to prove your innocence you must correctly guess the word I am thinking of...", "the punishment for failure...", "is death...", "by hanging!"];
-
-
+// make screen flash and thunder
 var lightening = function() {
     return $("body").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
     //$('#sound_tag')[0].play();
 };
 
 
+// assign an answer for this game
+function Answer() {
+//array of randomo words (possible answers)
+    this.words = ["it", "can", "be", "intimidating", "to", "leave", "your", "job", "and", "pursue", "novel", "career", "opportunities", "but", "ultimately", "when", "given", "only", "one", "life", "experiencing", "more", "challenging", "oneself", "seems", "better", "than", "sticking", "with", "status", "quo", "ride", "tigers", "drive", "racecars", "communicate", "with", "computers", "eat", "weird", "fruit", "but", "never", "stagnate"];
 
-var images = ["gallows.png", "gallows2.png", "gallows3.png", "gallows4.png", "gallows5.png", "gallows6.png", "gallows7.png", "gallows8.png", "gallows9.png"];
+// array of lowercase letters
+    this.alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
-//as wrong answers accumulate, switch to the next picture in the gallows array
-var switchPic = function(imageNumb) {
-    return $(".pic").attr("src", images[imageNumb]);
-}
-    
+// select a random word to use as this game's answer
+    this.word = chooseRandomElement(this.words);
+    console.log(this.word);
+
+//split the word into an array of its component letters
+    this.letters = this.word.split("");
+
+    this.numOfLetters = this.letters.length; 
+
+//Create an array of blank of spaces to initialize the game display
+    this.fillInAnswer = function(letterCount) {
+    blank = "__ ";
+    return blank.repeat(letterCount);
+    } // end fillInAnswer
 
 
-//grab one letter (only 1 letter per turn) that the user has inputinto the enterLetter input field
+} // end Answer
+    var answer = new Answer(); 
+
+
+
+// images to change as game play progresses
+function Gallows() {
+    this.images = ["gallows.png", "gallows2.png", "gallows3.png", "gallows4.png", "gallows5.png", "gallows6.png", "gallows7.png", "gallows8.png", "gallows9.png"];
+
+    this.count = 0; 
+
+//switch to the next picture in the gallows array
+  this.switchPic = function() {
+  return $(".pic").attr("src", this.images[this.count]);
+    }; //end switchPic
+} // end Gallows
+ 
+
 //grab one letter (only 1 letter per turn) that the user has inputinto the enterLetter input field
 var inputGuess = function() {     
     var guess = $("#enterLetter").val();
@@ -75,12 +95,12 @@ var checkGuess = function(guess) {
 } // end checkGuess    
 
 // end of game sequences
-var happyDance = function() {
-    animation
+var swingInNoose = function() {
+    //img fade to black then frowny face appears and enlarges
 }
 
-var swingInNoose = function() {
-    animation
+var happyDance = function() {
+    //img fade to white then happy face appears and enlarges
 }
 
 var winOrLose = function() {
@@ -91,62 +111,60 @@ var winOrLose = function() {
     }
 } 
 
-//Create an array of blank of spaces
-var createSpaceArray = function(spaceCount) {
-    var blank = "__ ";
-    return blank.repeat(spaceCount)
-}
 
-    var word = choose(words);
-console.log(word);
-    var letters = word.split("");
-    var spaces = createSpaceArray(letters.length);
 
-    // game intro 
-    var advanceIntroduction = function() {
-       
-        if(!advanceIntroduction.hasOwnProperty("sayNow")){
-            advanceIntroduction.sayNow = 0
-    } // end if sayNow not used yet
+   // game intro class 
+Introduction = function() {
+
+crimes = ["literally using the word literally figuratively", "making a run on sentenced that just went on and on long after it had stopped making sense and everyone had stopped caring and hoped it would end but it didn't", "cow-tipping", "putting a comma in a coma", "unlawful use of you're your", "failure to complete your sentence...", "public indecent text poster", "alligations of alliteration for ulterior allocation"];
+
+speech = ["You may be wondering why you're here...", "You are being tried by the grammar police for...", chooseRandomElement(crimes), "to prove your innocence you must correctly guess the word I am thinking of...", "the punishment for failure...", "is death...", "by hanging!"];
+
+    this.advance = function(){    
+        if(!this.hasOwnProperty("sayNow"))
+            this.sayNow = 0
+    
         
-        if (advanceIntroduction.sayNow < dialogue.length) {                   
-            var sayNow = dialogue[advanceIntroduction.sayNow];
-            advanceIntroduction.sayNow++;
+        if (this.sayNow < speech.length) {                   
+            var sayNow = speech[this.sayNow];
+            this.sayNow++;
             $("#speech").text(sayNow)
         }  else {
             lightening();
             $("#speech").text("press space to begin");
         } // end else
-    } // end game intro    
-
-// sequence of events for each letter guessed
-    var turnPlay = function(){
-            switchPic(count);
-            $("gallows.png").one("load", function() {
-  // do stuff
-            do {
-            $("#enterLetter").focus();
-            $("#enterLetter").keyup(inputGuess());
-            console.log($("#storeLetter").text().length)
-            } // end do 
-            while ($("#storeLetter").text().length < 1)
-            guessUsedOrNot();
-}).each(function() {
-  if(this.complete) $(this).load();
-});
-        } // end turnPlay
+    } // end initialize 
+}; // end introduction
 
 
-
-// move from intro dialogue to game play      
-    var startGame = function() {     
+// change display from intro to game play      
+var setUpGameDisplay = function() {    
              $("#speech").addClass("invisible"); 
-             $("#blanks, #enterLetter, #usedLetters").removeClass("invisible");
-             (turnPlay());
-           };  
+             $("#blanks").text(answer.fillInAnswer(answer.numOfLetters));
+             $("#blanks, #enterLetter, #usedLetters", "#labelUsedLetters").removeClass("invisible");
+             $("#enterLetter").focus();
+  }; 
+
+Hangman = function(){
+// sequence of events for each letter guessed
+    this.turnPlay = function(){
+        var gallows = new Gallows();
+        console.log("pre count of gallows pic number " + gallows.count)
+        if (gallows.count < $("#usedLetters").text().length)
+            {gallows.count ++} 
+        console.log("post pic of gallows count " + gallows.count)      
+        gallows.switchPic();
+        $("img").load(function() {   
+            $("#enterLetter").keyup(inputGuess());
+            console.log($("#storeLetter").text().length);
+           // guessUsedOrNot();
+        }); // end img load
+    } // end turnPlay
+} // end Hangman
+var hangman = new Hangman();
 
 //see if the letter entered has been used or not
-var guessUsedOrNot = function(){
+    this.guessUsedOrNot = function(){
     // clear input field so no new letters can be entered
         $("#enterLetter").val("") 
         var guess = $("#storeLetter").text();
@@ -155,23 +173,22 @@ var guessUsedOrNot = function(){
         console.log("letter is used");
         $("#enterLetter").focus();
         return lightening()}
-    else if (alphabet.indexOf(guess) == -1) {
+    else if (Answer.alphabet.indexOf(guess) == -1) {
         console.log("not a letter");
         $("#enterLetter").focus();
         return lightening()}
       else {
         $("#enterLetter").addClass("invisible")
         return checkGuess();    
-      }
-}
+      } // end else
+} // end guessUsedOrNot
 
 
 
 $(document).ready(function() {
-    //$("#speech").focus();   
-    $("#blanks").text(spaces);
-    
-    Mousetrap.bind('return', advanceIntroduction);
-    Mousetrap.bind('space', startGame);
+   var introduction = new Introduction();
+ 
+    Mousetrap.bind('return', introduction.advance);
+    Mousetrap.bind('space', setUpGameDisplay);
 
 });// end document ready
