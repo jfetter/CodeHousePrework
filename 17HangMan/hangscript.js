@@ -12,6 +12,10 @@ var lightening = function() {
     //$('#sound_tag')[0].play();
 };
 
+//switch to the picture in an array
+switchPic = function(image, count) {
+    return $(".pic").attr("src", image[count]);
+}; //end switchPic
 
 // assign an answer for this game
 function Answer() {
@@ -45,15 +49,9 @@ function Answer() {
 // images to change as game play progresses
 function Gallows() {
     this.images = ["gallows.png", "gallows2.png", "gallows3.png", "gallows4.png", "gallows5.png", "gallows6.png", "gallows7.png", "gallows8.png", "gallows9.png"];
-
     this.count = 0; 
-
-//switch to the next picture in the gallows array
-  this.switchPic = function() {
-  return $(".pic").attr("src", this.images[this.count]);
-    }; //end switchPic
 } // end Gallows
- 
+var gallows = new Gallows(); 
 
 //grab one letter (only 1 letter per turn) that the user has inputinto the enterLetter input field
 var inputGuess = function() {     
@@ -135,26 +133,17 @@ speech = ["You may be wondering why you're here...", "You are being tried by the
         } // end else
     } // end initialize 
 }; // end introduction
-
-
-// change display from intro to game play      
-var setUpGameDisplay = function() {    
-             $("#speech").addClass("invisible"); 
-             $("#blanks").text(answer.fillInAnswer(answer.numOfLetters));
-             $("#blanks, #enterLetter, #usedLetters", "#labelUsedLetters").removeClass("invisible");
-             $("#enterLetter").focus();
-  }; 
+ 
 
 Hangman = function(){
 // sequence of events for each letter guessed
     this.turnPlay = function(){
-        var gallows = new Gallows();
-        console.log("pre count of gallows pic number " + gallows.count)
-        if (gallows.count < $("#usedLetters").text().length)
-            {gallows.count ++} 
-        console.log("post pic of gallows count " + gallows.count)      
-        gallows.switchPic();
-        $("img").load(function() {   
+    $("img").load(function() {
+        if (gallows.count < $("#usedLetters").text().length){
+            gallows.count ++
+            switchPic(gallows.images, gallows.count)
+            } 
+        console.log("gallows count " + gallows.count)         
             $("#enterLetter").keyup(inputGuess());
             console.log($("#storeLetter").text().length);
            // guessUsedOrNot();
@@ -162,6 +151,17 @@ Hangman = function(){
     } // end turnPlay
 } // end Hangman
 var hangman = new Hangman();
+
+// change display from intro to game play      
+var setUpGameDisplay = function() { 
+             Mousetrap.unbind("space", setUpGameDisplay);            
+             $("#speech").addClass("invisible"); 
+             $("#blanks").text(answer.fillInAnswer(answer.numOfLetters));
+console.log(answer.fillInAnswer(answer.numOfLetters))
+             $("#blanks, #enterLetter, #usedLetters, #labelUsedLetters").removeClass("invisible");
+             switchPic(gallows.images, 0);
+             $("#enterLetter").focus();
+  };
 
 //see if the letter entered has been used or not
     this.guessUsedOrNot = function(){
@@ -190,5 +190,6 @@ $(document).ready(function() {
  
     Mousetrap.bind('return', introduction.advance);
     Mousetrap.bind('space', setUpGameDisplay);
+    $("img").load(hangman.turnPlay());
 
 });// end document ready
