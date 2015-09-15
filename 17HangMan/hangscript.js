@@ -53,18 +53,7 @@ function Gallows() {
 } // end Gallows
 var gallows = new Gallows(); 
 
-//grab one letter (only 1 letter per turn) that the user has inputinto the enterLetter input field
-var inputGuess = function() { 
-    if ($("#enterLetter").val.length < 3){
-        $("#enterLetter").focus();
-    alert("too slow");
-    }else{     
-    var guess = $("#enterLetter").val();
-    $("#storeLetter").text(guess);
-console.log("step 2.1: guess is " + guess)
-console.log ("step 2.2: length of input: "+ $("#enterLetter").val.length)
-}    
-} // end inputGuess
+
 
 // see if the letter that was guessed is in the word and if so, plug it in to the display where the blanks are whever that letter occurs
 var checkGuess = function(guess) {
@@ -126,8 +115,7 @@ speech = ["You may be wondering why you're here...", "You are being tried by the
     this.advance = function(){    
         if(!this.hasOwnProperty("sayNow"))
             this.sayNow = 0
-    
-        
+      
         if (this.sayNow < speech.length) {                   
             var sayNow = speech[this.sayNow];
             this.sayNow++;
@@ -138,7 +126,27 @@ speech = ["You may be wondering why you're here...", "You are being tried by the
         } // end else
     } // end initialize 
 }; // end introduction
- 
+var introduction = new Introduction(); 
+
+var cueStart = function(event) {      
+        if(String(event.which) == "13") {
+           introduction.advance();
+        } 
+        else if (String(event.which) == "32") {
+           setUpGameDisplay();
+        } 
+}
+
+//grab one letter (only 1 letter per turn) that the user has inputinto the enterLetter input field
+var inputGuess = function() { 
+     $("#enterLetter").keyup(function(){
+       var guess = $( this ).val();
+      $("#storeLetter").text(guess);   
+console.log("step 2.1: guess is " + $("#storeLetter"))
+console.log ("step 2.2: length of input: "+ $("#enterLetter").val.length)  
+        })
+  
+} // end inputGuess
 
 Hangman = function(){
 
@@ -148,7 +156,7 @@ Hangman = function(){
             gallows.count ++
             switchPic(gallows.images, gallows.count)
             } 
-            inputGuess();
+            
 console.log("step 3.1: gallows count " + gallows.count)               
 console.log("step 3.2: this many letters have been guessed: " + $("#storeLetter").text().length);
            // guessUsedOrNot();
@@ -157,13 +165,13 @@ console.log("step 3.2: this many letters have been guessed: " + $("#storeLetter"
 var hangman = new Hangman();
 
 // change display from intro to game play      
-var setUpGameDisplay = function() { 
-             Mousetrap.unbind("space", setUpGameDisplay);            
+var setUpGameDisplay = function() {            
              $("#speech").addClass("invisible"); 
              $("#blanks").text(answer.fillInAnswer(answer.numOfLetters));
 console.log("step 1" + answer.fillInAnswer(answer.numOfLetters))
              $("#blanks, #enterLetter, #usedLetters, #labelUsedLetters").removeClass("invisible");
              switchPic(gallows.images, 0);
+            $("#enterLetter").focus();
   };
 
 //see if the letter entered has been used or not
@@ -189,21 +197,10 @@ console.log("step 1" + answer.fillInAnswer(answer.numOfLetters))
 
 
 $(document).ready(function() {
-    var introduction = new Introduction();
-   var cueIntro = function(event, key) {
-        if(String(event.which) == "13") {
-           introduction.advance();
-        } 
-     }
- $(document).on('keypress', cueIntro);
-//     $("document").keypress(function(e) {
-//     if(String.fromCharCode(event.which) === '13') {
-//         introduction.advance;
-//     }
-//     else if(String.fromCharCode(event.which) === ' ') {
-//         setUpGameDisplay
-//     }
-//  });
-   // $("input").load(hangman.turnPlay());
+
+    
+$(document).on('keypress', cueStart);
+inputGuess();
+
 
 });// end document ready
