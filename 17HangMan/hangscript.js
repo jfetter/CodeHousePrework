@@ -32,7 +32,8 @@ function Answer() {
 //split the word into an array of its component letters
     this.letters = this.word.split("");
 
-    this.numOfLetters = this.letters.length; 
+//keep track of guessed letters
+    this.guessed =[];     
 
 //Create an array of blank of spaces to initialize the game display
     this.fillInAnswer = function(letterCount) {
@@ -140,11 +141,15 @@ var cueStart = function(event) {
 //grab one letter (only 1 letter per turn) that the user has inputinto the enterLetter input field
 var inputGuess = function() { 
      $("#enterLetter").keyup(function(){
-       var guess = $( this ).val();
-      $("#storeLetter").text(guess);   
-console.log("step 2.1: guess is " + $("#storeLetter"))
-console.log ("step 2.2: length of input: "+ $("#enterLetter").val.length)  
-        })
+      var guess = $.trim($( this ).val()).toLowerCase(); 
+      if (answer.alphabet.indexOf(guess) > -1 )
+      {(answer.guessed).push(guess);
+        $("#enterLetter").addClass("invisible")
+        return guess   
+     }  
+      else { $("#enterLetter").val("")}
+     })
+
   
 } // end inputGuess
 
