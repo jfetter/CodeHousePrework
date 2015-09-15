@@ -141,7 +141,7 @@ speech = ["You may be wondering why you're here...", "You are being tried by the
  
 
 Hangman = function(){
-    
+
 // sequence of events for each letter guessed
     this.turnPlay = function(){
         if (gallows.count < $("#usedLetters").text().length){
@@ -189,10 +189,21 @@ console.log("step 1" + answer.fillInAnswer(answer.numOfLetters))
 
 
 $(document).ready(function() {
-   var introduction = new Introduction();
- 
-    Mousetrap.bind('return', introduction.advance);
-    Mousetrap.bind('space', setUpGameDisplay);
-    $("input").load(hangman.turnPlay());
+    var introduction = new Introduction();
+   var cueIntro = function(event, key) {
+        if(String(event.which) == "13") {
+           introduction.advance();
+        } 
+     }
+ $(document).on('keypress', cueIntro);
+//     $("document").keypress(function(e) {
+//     if(String.fromCharCode(event.which) === '13') {
+//         introduction.advance;
+//     }
+//     else if(String.fromCharCode(event.which) === ' ') {
+//         setUpGameDisplay
+//     }
+//  });
+   // $("input").load(hangman.turnPlay());
 
 });// end document ready
