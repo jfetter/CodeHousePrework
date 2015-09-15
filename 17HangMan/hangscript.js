@@ -1,5 +1,17 @@
 // utility functions
 
+//scan through and array to see if it contains a certain value and replace the value with another value if it does not match
+replaceMisses = function(array, value, replacement) {
+     return array.map(function(item, index, all) {
+        if (value == item) {
+alert("match at index " + index + ". " + value + " = " + item);
+            item = item.replace(item, value);
+        }// end if
+        else {item = item.replace(item, replacement);}
+    return item;
+     }) // end map
+} // end matchAndReplace
+
 //choose a random element from an array
 var chooseRandomElement = function(array) {
     var array = array;
@@ -12,7 +24,7 @@ var lightening = function() {
     //$('#sound_tag')[0].play();
 };
 
-//switch to the picture in an array
+//switch the picture in an array
 switchPic = function(image, count) {
     return $(".pic").attr("src", image[count]);
 }; //end switchPic
@@ -27,50 +39,46 @@ function Answer() {
 
 // select a random word to use as this game's answer
     this.word = chooseRandomElement(this.words);
-    console.log(this.word);
 
 //split the word into an array of its component letters
     this.letters = this.word.split("");
 
-//keep track of guessed letters
-    this.guessed =[];     
-
-//Create an array of blank of spaces to initialize the game display
-    this.fillInAnswer = function(letterCount) {
-    blank = "__ ";
-    return blank.repeat(letterCount);
-    } // end fillInAnswer
-
-
 } // end Answer
-    var answer = new Answer(); 
+var answer = new Answer(); 
+console.log(answer.word)
 
+function HitsAndMisses(){
+//keep track of guessed letters
+    this.guess;   
 
+//keep track of correct guesses
+    this.hits = [];
 
-// images to change as game play progresses
-function Gallows() {
-    this.images = ["gallows.png", "gallows2.png", "gallows3.png", "gallows4.png", "gallows5.png", "gallows6.png", "gallows7.png", "gallows8.png", "gallows9.png"];
-    this.count = 0; 
-} // end Gallows
-var gallows = new Gallows(); 
+//keep track of missed guesses
+    this.misses=[];
 
+    this.answerSoFar = replaceMisses( $("#blanks").text().split(""),this.hits, "__ ")
 
+    //see if the letter entered has been used or not
+    this.validateGuess = function(guess){
+// compare the letter that was input to see if it is an already used letter            
+    if ((this.hits.indexOf(guess) > -1 ) || (this.misses.indexOf(guess) > -1)){ 
+console.log("letter is used");
+        //go through used letters and turn it red? 
+        lightening()}
+    else if (answer.letters.indexOf(guess) > -1) {
+console.log("hit");    
+        this.hits.push(guess)}
+      else {
+        $("#enterLetter").addClass("invisible")
+        this.misses.push(guess)
+    } // end else
+     $("#enterLetter").val("");
+     $("#enterLetter").removeClass("invisible")
+     $("#enterLetter").focus();
+} // end validateGuess
 
-// see if the letter that was guessed is in the word and if so, plug it in to the display where the blanks are whever that letter occurs
-var checkGuess = function(guess) {
-   console.log("made it to check guess")
-//     letters.map(function(item, index, all) {
-//         var answerSoFar = $("#blanks").text().split(" ");
-//         console.log("blanks " + answerSoFar + "guess " + guess + " item " + item + " index " + index);
-//         if (guess == " " + item) {
-//             alert("match at index " + index + ". " + guess + " = " + item);
-//             // insert the matched letter in the place where the letter appears in the answer (index) and remove (1) item (the blank) from the array in that place
-//             answerSoFar.splice(index, 1, guess);
-//             // move the answer so far into the blanks div (text area)
-//             // convert it into a string 
-//             // and remove commas, quotes etc  
-//            // $("#blanks").text(answerSoFar).toString().replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g, "");
-//         }// end if
+// convert array from matchAndReplace into    
 //         // else if the letter does not match add a letter to the (invisible) wrongGuess div      
                
 //         else {
@@ -84,8 +92,20 @@ var checkGuess = function(guess) {
 //     // if the letter didn't match anything in the answer word, throw it into the used letters box
 //     if ($("#wrongGuess").text() == 1) {
 //         $("#usedLetters").text(guess);
-//     } // end if wrongGuess
-} // end checkGuess    
+//     } // end if wrongGuess 
+
+}
+hitsAndMisses = new HitsAndMisses();
+
+// images to change as game play progresses
+function Gallows() {
+    this.images = ["gallows.png", "gallows2.png", "gallows3.png", "gallows4.png", "gallows5.png", "gallows6.png", "gallows7.png", "gallows8.png", "gallows9.png"];
+    this.count = 0; 
+} // end Gallows
+var gallows = new Gallows(); 
+
+
+  
 
 // end of game sequences
 var swingInNoose = function() {
@@ -138,14 +158,18 @@ var cueStart = function(event) {
         } 
 }
 
+
+
 //grab one letter (only 1 letter per turn) that the user has inputinto the enterLetter input field
 var inputGuess = function() { 
      $("#enterLetter").keyup(function(){
       var guess = $.trim($( this ).val()).toLowerCase(); 
       if (answer.alphabet.indexOf(guess) > -1 )
-      {(answer.guessed).push(guess);
+      {(hitsAndMisses.guess = guess);
         $("#enterLetter").addClass("invisible")
-        return guess   
+ console.log("step 2: guess is " + hitsAndMisses.guess)  
+        hitsAndMisses.validateGuess(guess);
+              
      }  
       else { $("#enterLetter").val("")}
      })
@@ -172,40 +196,26 @@ var hangman = new Hangman();
 // change display from intro to game play      
 var setUpGameDisplay = function() {            
              $("#speech").addClass("invisible"); 
-             $("#blanks").text(answer.fillInAnswer(answer.numOfLetters));
-console.log("step 1" + answer.fillInAnswer(answer.numOfLetters))
              $("#blanks, #enterLetter, #usedLetters, #labelUsedLetters").removeClass("invisible");
              switchPic(gallows.images, 0);
             $("#enterLetter").focus();
   };
 
-//see if the letter entered has been used or not
-    this.guessUsedOrNot = function(){
-    // clear input field so no new letters can be entered
-        $("#enterLetter").val("") 
-        var guess = $("#storeLetter").text();
-    // compare the letter that was input to see if it is an already used letter            
-    if ((($("#usedLetters").text()).indexOf(guess) > -1 ) || (($("#blanks").text()).indexOf(guess) == -1)){ 
-        console.log("letter is used");
-        $("#enterLetter").focus();
-        return lightening()}
-    else if (Answer.alphabet.indexOf(guess) == -1) {
-        console.log("not a letter");
-        $("#enterLetter").focus();
-        return lightening()}
-      else {
-        $("#enterLetter").addClass("invisible")
-        return checkGuess();    
-      } // end else
-} // end guessUsedOrNot
+
 
 
 
 $(document).ready(function() {
 
-    
-$(document).on('keypress', cueStart);
-inputGuess();
 
+$(document).on('keypress', cueStart);
+//while () {
+// move the answer so far into the blanks div (text area)
+// convert it into a string and remove commas  /[A-Z]/g
+$("#blanks").text(replaceMisses(answer.letters, hitsAndMisses.guess, "__ ")).toString().replace(/,/g, ""); 
+inputGuess();
+$("#usedLetters").text(hitsAndMisses.misses);   
+
+//}
 
 });// end document ready
