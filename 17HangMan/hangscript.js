@@ -1,20 +1,21 @@
 // utility functions
 
 //scan through and array to see if it contains a certain value and replace the value with another value if it does not match
-replaceMisses = function(array, value, replacement) {
+var replaceMisses = function(array, value, replacement) {
      return array.map(function(item, index, all) {
         if (value == item) {
 alert("match at index " + index + ". " + value + " = " + item);
-            item = item.replace(item, value);
+            item = item;
         }// end if
-        else {item = item.replace(item, replacement);}
+        else {item = item.replace(item, replacement);
+console.log("value not found");
+    }
     return item;
      }) // end map
 } // end matchAndReplace
 
 //choose a random element from an array
 var chooseRandomElement = function(array) {
-    var array = array;
     return array[Math.floor((Math.random() * (array.length-1)) - 1)]
 };
 
@@ -48,34 +49,43 @@ var answer = new Answer();
 console.log(answer.word)
 
 function HitsAndMisses(){
-//keep track of guessed letters
+//keep track of current guess letters
     this.guess;   
 
-//keep track of correct guesses
+//keep track of guesses made
     this.hits = [];
 
-//keep track of missed guesses
-    this.misses=[];
+    this.misses = [];
 
-    this.answerSoFar = replaceMisses( $("#blanks").text().split(""),this.hits, "__ ")
-
-    //see if the letter entered has been used or not
+    this.hitsSoFar = function(hits){
+        hits.map(function(item, index, all) {
+        replaceMisses(answer.letters, item, "__ ");
+console.log(all);
+    return all;
+     }) // end map
+    }// end guessSoFar
+//determine if current guess has been guessed already, and if not if it is in the answer or not
+// then display it. 
     this.validateGuess = function(guess){
 // compare the letter that was input to see if it is an already used letter            
-    if ((this.hits.indexOf(guess) > -1 ) || (this.misses.indexOf(guess) > -1)){ 
+    if ((this.hits.indexOf(guess) > -1 || this.misses.indexOf(guess) > -1 )){ 
 console.log("letter is used");
-        //go through used letters and turn it red? 
         lightening()}
     else if (answer.letters.indexOf(guess) > -1) {
-console.log("hit");    
-        this.hits.push(guess)}
-      else {
-        $("#enterLetter").addClass("invisible")
-        this.misses.push(guess)
+console.log("hit");     
+        this.hits.push(guess);
+        $("#blanks").text(this.hitsSoFar([this.hits])); 
+        } else {
+        this.misses.push(guess);
+        $("#usedLetters").text(hitsAndMisses.misses);
     } // end else
-     $("#enterLetter").val("");
-     $("#enterLetter").removeClass("invisible")
-     $("#enterLetter").focus();
+//      $("#enterLetter").val("");
+//      $("#enterLetter").removeClass("invisible")
+//      $("#enterLetter").focus();
+
+        console.log(" misses: " + this.misses + "hits: " + this.hits)
+        return (guess);
+
 } // end validateGuess
 
 // convert array from matchAndReplace into    
@@ -212,9 +222,9 @@ $(document).on('keypress', cueStart);
 //while () {
 // move the answer so far into the blanks div (text area)
 // convert it into a string and remove commas  /[A-Z]/g
-$("#blanks").text(replaceMisses(answer.letters, hitsAndMisses.guess, "__ ")).toString().replace(/,/g, ""); 
+$("#blanks").text(replaceMisses(answer.letters, hitsAndMisses.guessed, "__ ")).toString().replace(/,/g, ""); 
 inputGuess();
-$("#usedLetters").text(hitsAndMisses.misses);   
+   
 
 //}
 
