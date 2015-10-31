@@ -1,39 +1,40 @@
-// click the tower to select a specific element
-// event.target == $(this)
-
 $(document).ready(init);
 function init () {
-$(".tower").on("click", selectTopOfStack);
-$(".highlight").on("click", removeTopOfStack);
- // $("*").on("click", test)
 
- // function test (event) {
-	// $("body").addClass("highlight");
- // }
+
+	$(".tower").on("click", selectTopOfStack);
 
 function selectTopOfStack(event){
-	event.stopPropagation();
-	// var firstChi = "'div #"
-	// firstChi += $(this).attr("id");
-	// firstChi +=  ":first-child'";
 			var selectedThing = $(this).children()[0];
-			console.log(selectedThing);
-			$(selectedThing).addClass("highlight");
+			var thingDataSize = $(this).find(">:first-child").data("size");
+			console.log("S T:", selectedThing, "S T S:", thingDataSize);
+			var lilBroSize = $(this).find(">:nth-child(2)").data("size");
+			console.log("LBS:", lilBroSize);
+	if(thingDataSize < lilBroSize || lilBroSize === false){
+			$(selectedThing).toggleClass("highlight");
+		 } //else if (){
+		// 	removeTopOfStack;
+		// } else {
+		// 	placePiece;
+		// }
+}
+function removeTopOfStack () {
+	var removedThing =	$(selectedThing).detach().removeClass("highlight");
+	return removedThing;
 }
 
-function removeTopOfStack (event) {
-	event.stopPropagation();
-	$()
-	console.log("removeTopOfStack");
-	var topPiece = $(".tower:first-child").detach();
-	
-}
+function placePiece () {
 
-function placePiece (event) {
-	
+ 	$("this").append(removeTopOfStack);
 };
 
 
+
+
+// if (sum of values === floater1 2 and 3 are all in tower 3 )
+// {
+// 	declareVictory;
+// }
 
 function declareVictory (){
 	event.stopPropagation();
